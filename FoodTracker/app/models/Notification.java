@@ -1,6 +1,13 @@
-package controllers;
+package models;
+
+/*
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import play.db.ebean.Model;
+*/
 
 public class Notification {
+	
 	
 	private String id;
 	private String user_id;

@@ -1,8 +1,20 @@
-package controllers;
+package models;
 
 import java.util.Date;
+/*
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import play.db.ebean.Model;
+import java.util.*;
+import javax.persistence.*;
+import play.db.ebean.*;
+import play.data.format.*;
+import play.data.validation.*;
+*/
 
 public class User {
+	
 	
 	private String id;
 	private String username;
