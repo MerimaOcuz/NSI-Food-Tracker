@@ -7,24 +7,18 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava)
 scalaVersion := "2.11.6"
 
 libraryDependencies ++= Seq(
+  javaCore,
   javaJdbc,
   cache,
-  javaWs
-)
+  javaWs,
+  "mysql" % "mysql-connector-java" % "5.1.18"
+  )
 
-<<<<<<< HEAD
+lazy val myProject = (project in file("."))
+  .enablePlugins(PlayJava, PlayEbean)
+    
+
 // Play provides two styles of routers, one expects its actions //to be injected, the
 // other, legacy style, accesses its actions statically.
 
 //routesGenerator := InjectedRoutesGenerator //da bi radio tutorial za login bez dependency injection
-
-=======
-// Play provides two styles of routers, one expects its actions to be injected, the
-// other, legacy style, accesses its actions statically.
-// routesGenerator := InjectedRoutesGenerator
-
-// Compile the project before generating Eclipse files, so that generated .scala or .class files for views and routes are present
-EclipseKeys.preTasks := Seq(compile in Compile)
-EclipseKeys.projectFlavor := EclipseProjectFlavor.Java           // Java project. Don't expect Scala IDE
-EclipseKeys.createSrc := EclipseCreateSrc.ValueSet(EclipseCreateSrc.ManagedClasses, EclipseCreateSrc.ManagedResources)  // Use .class files instead of generated .scala files for views and routes 
->>>>>>> origin/master

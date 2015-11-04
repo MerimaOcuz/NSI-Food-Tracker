@@ -1,41 +1,5 @@
-<<<<<<< HEAD
 @(user: String, role: String, form: Form[Application.Register])
-    <div id="section_title" style="margin-top: 30px;"> Register
-        <a href="@routes.Application.login"> Login </a>
-    </div>
-    <div class="input_form input_form_style">
-      <div class="field">
-        <label for="name"> Name </label>
-        <input type="name" name="name" placeholder="Name">
-      </div>
-      <div class="field">
-        <label for="surname"> Surname </label>
-        <input type="surname" name="surname" placeholder="Surname">
-      </div>
-      <div class="field">
-        <label for="email"> Email </label>
-        <input type="email" name="email" placeholder="Email">
-      </div>
-      <div class="field">
-        <label for="password"> Password </label>
-        <input type="password" name="password" placeholder="Password">
-      </div>
-      <div class="field">
-        <label for="phone_number"> Phone number </label>
-        <input type="phone_number" name="phone_number" placeholder="Phone number">
-      </div>
-      <div class="field">
-        <label for="address"> Address </label>
-        <input type="address" name="address" placeholder="Address">
-      </div>
-      <div class="field">
-        <button type="submit" id="submit-button">Register</button>
-      </div>
-	  
-	 </div>
-<<<<<<< HEAD
-=======
-@(form: Form[Application.Register])
+@main("Registration") {
 <html>
     <head>
         <title>Food Tracker</title>
@@ -50,19 +14,49 @@
    		<div class="wrapper">
 			<div class="container">
 			<h1>Sign Up to FoodTracker</h1>
-				@helper.form(routes.Application.authenticate) {
-				<form class="form">
-					<input type="text" placeholder="Ime">
-					<input type="text" placeholder="Prezime">
-					<input type="text" placeholder="Adresa">
+			  @helper.form(routes.Application.addUser) {
+				<!--<div id="section_title" style="margin-top: 30px;"> Register
+					<a href="@routes.Application.login"> Login </a>
+				</div>-->
+				<div class="input_form input_form_style">
+				  <div class="field">
+					<label for="name"> Name </label>
+					<input type="name" name="name" placeholder="Name">
+				  </div>
+				  <div class="field">
+					<label for="surname"> Surname </label>
+					<input type="surname" name="surname" placeholder="Surname">
+				  </div>
+				  <div class="field">
+					<label for="email"> Email </label>
 					<input type="email" name="email" placeholder="Email" value="@form("email").value">
-					<input type="password" placeholder="Password">
-					<button type="submit" id="login-button">Submit</button>
-				</form>
-				}
-			</div>
-	
-			<ul class="bg-bubbles">
+				  </div>
+				  <div class="field">
+					<label for="password"> Password </label>
+					<input type="password" name="password" placeholder="Password">
+				  </div>
+				  <div class="field">
+					<label for="phone_number"> Phone number </label>
+					<input type="phone_number" name="phone_number" placeholder="Phone number">
+				  </div>
+				  <div class="field">
+					<label for="address"> Address </label>
+					<input type="address" name="address" placeholder="Address">
+				  </div>
+				  <div class="field">
+					<button type="submit" id="submit-button">Register</button>
+				  </div>
+				  </div>
+				}  
+				 </div>
+				 <ul class="bg-bubbles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
 				<li></li>
 				<li></li>
 				<li></li>
@@ -77,8 +71,6 @@
 		</div>
    		
     </body>
-</html>
+</html>			
 
->>>>>>> origin/master
-=======
->>>>>>> parent of 544158d... registration done!
+}

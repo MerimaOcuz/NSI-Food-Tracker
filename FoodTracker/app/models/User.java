@@ -1,52 +1,39 @@
 package models;
 
 import java.util.Date;
-
-<<<<<<< HEAD
-
-/*
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import play.db.ebean.*;
 import com.avaje.ebean.*;
-import play.db.ebean.Model;
-import java.util.*;
-import play.data.format.*;
-import play.data.validation.*;
-*/
+import javax.persistence.*;
 
-<<<<<<< HEAD
+
+@Entity
 public class User {
-	
-	
-=======
-public class User {
-	
->>>>>>> origin/master
-=======
-public class User {
-	
-	
->>>>>>> parent of 544158d... registration done!
-	private String id;
-	private String username;
+	@Id
+	//private String id;
+	private String email;
 	private String password;
 	private String name;
 	private String surname;
 	private Date birth_date;
 	private String address;
-	private String phone_number;
 	private String type;
+	private String phone_number;
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 544158d... registration done!
-	public String getId() { return this.id; }
-	public void setId(String id) { this.id = id; }
+	public User(String name, String surname, String email, String password, String phone, String address, String type) {
+      this.email = email;
+      this.name = name;
+      this.surname = surname;
+      this.password = password;
+      this.phone_number = phone;
+      this.address = address;
+	  this.type = type;
+    }
 	
-	public String getUsername() { return this.username; }
-	public void setUsername(String username) { this.username = username; }
+	//public String getId() { return this.id; }
+	//public void setId(String id) { this.id = id; }
+	
+	public String getEmail() { return this.email; }
+	public void setEmail(String email) { this.email = email; }
 	
 	public String getPassword() { return this.password; }
 	public void setPassword(String password) { this.password = password; }
@@ -68,66 +55,12 @@ public class User {
 	
 	public String getType() { return this.type; }
 	public void setType(String type) { this.type = type; }
-<<<<<<< HEAD
-=======
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getSurname() {
-		return surname;
-	}
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-	public Date getBirth_date() {
-		return birth_date;
-	}
-	public void setBirth_date(Date birth_date) {
-		this.birth_date = birth_date;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getPhone_number() {
-		return phone_number;
-	}
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
 	
-	
->>>>>>> origin/master
-=======
->>>>>>> parent of 544158d... registration done!
+	public static void insert(String name, String surname, String email, String password, String phone, 
+      String address, String role) {
+		  Date birth_date=new Date();
+        User u = new User(name, surname, email, password, phone, address, "User");
+		Ebean.save(u);
+    }
 
 }
