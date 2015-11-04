@@ -9,6 +9,7 @@ import models.*;
 import static play.data.Form.*;
 import play.data.Form;
 import play.mvc.Controller;
+import java.util.Date;
 
 public class Application extends Controller {
 	static Form<Register> registerForm = form(Register.class);
@@ -47,7 +48,9 @@ public class Application extends Controller {
 	        String password = registerForm.get().password;
 	        String phone = registerForm.get().phone;
 	        String address = registerForm.get().address;
-	        User.insert(name, surname, email, password, phone, address, "User");
+			Date birth_date = registerForm.get().birth_date;
+			
+	        User.insert(name, surname, birth_date, email, password, phone, address, "User");
 	        return redirect(
 	            routes.Application.index()
 	        );
@@ -70,6 +73,7 @@ public class Application extends Controller {
 	    public String password;
 	    public String phone;
 	    public String address;
+		public Date birth_date;
 	}
 
 }

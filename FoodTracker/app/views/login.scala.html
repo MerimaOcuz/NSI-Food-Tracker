@@ -15,7 +15,7 @@
 			<h1>Log In</h1>
 				@helper.form(routes.Application.authenticate) {
 				<form class="form">
-					<input type="email" name="email" placeholder="Email" > 
+					<input type="email" name="email" placeholder="Email" value="@form("email").value"> 
 					<input type="password" placeholder="Password">
 					<button type="submit" id="login-button">Login</button>
 				</form>
