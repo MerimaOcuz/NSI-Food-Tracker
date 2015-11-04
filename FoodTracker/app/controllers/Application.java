@@ -9,7 +9,7 @@ import views.html.*;
 public class Application extends Controller {
 
     public Result index() {
-        return ok(index.render("Food Tracker :)"));
+        return ok(index.render("Food Tracker Application"));
     }
     
     public Result login() {
