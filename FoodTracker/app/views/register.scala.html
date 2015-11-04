@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @(user: String, role: String, form: Form[Application.Register])
     <div id="section_title" style="margin-top: 30px;"> Register
         <a href="@routes.Application.login"> Login </a>
@@ -32,3 +33,49 @@
       </div>
 	  
 	 </div>
+=======
+@(form: Form[Application.Register])
+<html>
+    <head>
+        <title>Food Tracker</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/styleRegister.css")">
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/styleRegister.js")"></script>
+        
+    </head>
+    <body>
+        <header>
+            <a href="@routes.Application.index" id="logo">FoodTracker</a>
+        </header>
+   		<div class="wrapper">
+			<div class="container">
+			<h1>Sign Up to FoodTracker</h1>
+				@helper.form(routes.Application.authenticate) {
+				<form class="form">
+					<input type="text" placeholder="Ime">
+					<input type="text" placeholder="Prezime">
+					<input type="text" placeholder="Adresa">
+					<input type="email" name="email" placeholder="Email" value="@form("email").value">
+					<input type="password" placeholder="Password">
+					<button type="submit" id="login-button">Submit</button>
+				</form>
+				}
+			</div>
+	
+			<ul class="bg-bubbles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+   		
+    </body>
+</html>
+
+>>>>>>> origin/master

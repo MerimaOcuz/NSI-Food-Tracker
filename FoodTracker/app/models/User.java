@@ -2,6 +2,7 @@ package models;
 
 import java.util.Date;
 
+<<<<<<< HEAD
 
 /*
 import javax.persistence.Entity;
@@ -17,6 +18,10 @@ import play.data.validation.*;
 public class User {
 	
 	
+=======
+public class User {
+	
+>>>>>>> origin/master
 	private String id;
 	private String username;
 	private String password;
@@ -27,6 +32,7 @@ public class User {
 	private String phone_number;
 	private String type;
 	
+<<<<<<< HEAD
 	public String getId() { return this.id; }
 	public void setId(String id) { this.id = id; }
 	
@@ -53,5 +59,63 @@ public class User {
 	
 	public String getType() { return this.type; }
 	public void setType(String type) { this.type = type; }
+=======
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSurname() {
+		return surname;
+	}
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	public Date getBirth_date() {
+		return birth_date;
+	}
+	public void setBirth_date(Date birth_date) {
+		this.birth_date = birth_date;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getPhone_number() {
+		return phone_number;
+	}
+	public void setPhone_number(String phone_number) {
+		this.phone_number = phone_number;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
+>>>>>>> origin/master
 
 }

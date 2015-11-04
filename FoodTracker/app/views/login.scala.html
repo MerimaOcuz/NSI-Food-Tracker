@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @(form: Form[Application.Login])
 <div class="input_form input_form_style">
         <div class="field">
@@ -12,3 +13,46 @@
           <button type="submit" id="submit-button">Login</button>
         </div>
       </div>
+=======
+@(form: Form[Application.Login])
+<html>
+    <head>
+        <title>Food Tracker</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/style.css")">
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/style.js")"></script>
+        
+    </head>
+    <body>
+        <header>
+            <a href="@routes.Application.index" id="logo">FoodTracker</a>
+        </header>
+   		<div class="wrapper">
+			<div class="container">
+			<h1>Log In</h1>
+				@helper.form(routes.Application.authenticate) {
+				<form class="form">
+					<input type="email" name="email" placeholder="Email" value="@form("email").value">
+					<input type="password" placeholder="Password">
+					<button type="submit" id="login-button">Login</button>
+				</form>
+				}
+			</div>
+	
+			<ul class="bg-bubbles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+   		
+    </body>
+</html>
+
+>>>>>>> origin/master
