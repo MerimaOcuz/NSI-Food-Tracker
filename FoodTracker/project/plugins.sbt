@@ -26,6 +26,9 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-play-enhancer" % "1.1.0")
 // Play enhancer, regardless of whether the line above is commented out or not.
 // addSbtPlugin("com.typesafe.sbt" % "sbt-play-ebean" % "1.0.0")
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 544158d... registration done!
 addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "4.0.0")
 =======
 >>>>>>> origin/master

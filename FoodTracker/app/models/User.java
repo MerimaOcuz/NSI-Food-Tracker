@@ -15,6 +15,7 @@ import play.data.format.*;
 import play.data.validation.*;
 */
 
+<<<<<<< HEAD
 public class User {
 	
 	
@@ -22,6 +23,11 @@ public class User {
 public class User {
 	
 >>>>>>> origin/master
+=======
+public class User {
+	
+	
+>>>>>>> parent of 544158d... registration done!
 	private String id;
 	private String username;
 	private String password;
@@ -33,6 +39,9 @@ public class User {
 	private String type;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 544158d... registration done!
 	public String getId() { return this.id; }
 	public void setId(String id) { this.id = id; }
 	
@@ -59,6 +68,7 @@ public class User {
 	
 	public String getType() { return this.type; }
 	public void setType(String type) { this.type = type; }
+<<<<<<< HEAD
 =======
 	public String getId() {
 		return id;
@@ -117,5 +127,7 @@ public class User {
 	
 	
 >>>>>>> origin/master
+=======
+>>>>>>> parent of 544158d... registration done!
 
 }
