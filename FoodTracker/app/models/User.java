@@ -1,6 +1,8 @@
 package models;
 
+
 import java.util.Date;
+import java.util.*;
 import play.db.ebean.*;
 import com.avaje.ebean.*;
 import javax.persistence.*;
@@ -62,5 +64,10 @@ public class User {
         User u = new User(name, surname, birth_date, email, password, phone, address, "User");
 		Ebean.save(u);
     }
-
+	public static User check(String email, String password) {
+		        User users = Ebean.find (User.class)
+		        					.where().eq("email",email).eq("password",password).findUnique();
+		        return users;
+		    }
 }
+

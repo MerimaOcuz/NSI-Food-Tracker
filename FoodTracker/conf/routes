@@ -9,7 +9,7 @@ GET     /                           @controllers.Application.index()
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 GET     /login                  	@controllers.Application.login()
-POST    /login                      @controllers.Application.authenticate()
+POST    /login                      controllers.Application.authenticate()
 
 
 #Registration page
