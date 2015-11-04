@@ -1,9 +1,6 @@
 package models;
 
 import java.util.Date;
-import play.db.ebean.*;
-import com.avaje.ebean.*;
-import javax.persistence.*;
 
 
 /*
@@ -16,34 +13,25 @@ import java.util.*;
 import play.data.format.*;
 import play.data.validation.*;
 */
-@Entity
+
 public class User {
-	@Id
-	//private String id;
-	private String email;
+	
+	
+	private String id;
+	private String username;
 	private String password;
 	private String name;
 	private String surname;
 	private Date birth_date;
 	private String address;
-	private String type;
 	private String phone_number;
+	private String type;
 	
-	public User(String name, String surname, String email, String password, String phone, String address, String type) {
-      this.email = email;
-      this.name = name;
-      this.surname = surname;
-      this.password = password;
-      this.phone_number = phone;
-      this.address = address;
-	  this.type = type;
-    }
+	public String getId() { return this.id; }
+	public void setId(String id) { this.id = id; }
 	
-	//public String getId() { return this.id; }
-	//public void setId(String id) { this.id = id; }
-	
-	public String getEmail() { return this.email; }
-	public void setEmail(String email) { this.email = email; }
+	public String getUsername() { return this.username; }
+	public void setUsername(String username) { this.username = username; }
 	
 	public String getPassword() { return this.password; }
 	public void setPassword(String password) { this.password = password; }
@@ -65,12 +53,5 @@ public class User {
 	
 	public String getType() { return this.type; }
 	public void setType(String type) { this.type = type; }
-	
-	public static void insert(String name, String surname, String email, String password, String phone, 
-      String address, String role) {
-		  Date birth_date=new Date();
-        User u = new User(name, surname, email, password, phone, address, "User");
-		Ebean.save(u);
-    }
 
 }
