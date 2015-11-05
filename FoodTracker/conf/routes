@@ -15,3 +15,6 @@ POST    /login                      controllers.Application.authenticate()
 #Registration page
 GET     /register                  controllers.Application.register()
 POST    /register                      controllers.Application.addUser()
+
+#Dashboard
+GET		/dashboard					controllers.Application.dashboard()

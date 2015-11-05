@@ -22,6 +22,7 @@ public class Application extends Controller {
          return ok(login.render(loginForm));
     }
     
+    
     public static Result authenticate() {
         Form<Login> loginForm = form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {
@@ -30,7 +31,7 @@ public class Application extends Controller {
             session().clear();
             session("email", loginForm.get().email);
             return redirect(
-                routes.Application.index()
+                routes.Application.dashboard()
             );
         }
     }
@@ -59,6 +60,10 @@ public class Application extends Controller {
         return ok(
         	register.render(user, role, registerForm)
         	);
+    }
+    
+    public static Result dashboard() {
+    	return ok(dashboard.render());
     }
 	
 	public static Result addUser() {        
