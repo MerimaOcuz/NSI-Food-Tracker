@@ -50,9 +50,9 @@ body :-ms-input-placeholder {
   background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
   background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
   position: absolute;
-  top: 440px;
+  top: 507px;
   width: 100%;
-  height: 600px;
+  height: 700px;
   margin-top: -300px;
   overflow: hidden;
 }
@@ -64,7 +64,7 @@ body :-ms-input-placeholder {
 .container {
   max-width: 400px;
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 10px 0;
   height: 400px;
   text-align: center;
 }
@@ -239,7 +239,7 @@ form button:hover {
 }
 
 header {
-	background-image:url('../images/login_header.jpg'); background-repeat:no-repeat; background-position:left top; background-size:cover; padding: 0px;
-    height: 140px; padding:0px;
+	background-image:url('../images/hrana1.jpg'); background-repeat:no-repeat; background-position:left top; background-size:cover; padding: 0px;
+    height: 207px; padding:0px;
 
 }
