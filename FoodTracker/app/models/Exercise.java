@@ -1,16 +1,23 @@
 package models;
 
-public class Exercise {
+import java.util.*;
+import play.db.ebean.*;
+import com.avaje.ebean.*;
+import javax.persistence.*;
 
-	private String id;
+@Entity
+public class Exercise {
+	
+	@Id
+	private int id;
 	private String title;
 	private String description;
 	private int calories_per_minute;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getTitle() {
