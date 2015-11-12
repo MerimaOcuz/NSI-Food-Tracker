@@ -9,11 +9,17 @@ import models.*;
 import static play.data.Form.*;
 import play.data.Form;
 import play.mvc.Controller;
-import java.util.Date;
+import java.util.*;
+
+import play.db.ebean.*;
+import com.avaje.ebean.*;
+import javax.persistence.*;
 
 public class Application extends Controller {
 	static Form<Register> registerForm = form(Register.class);
 	static Form<Login> loginForm = form(Login.class);
+	static Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class);
+	
     public Result index() {
         return ok(index.render("Food Tracker Application"));
     }
@@ -65,6 +71,25 @@ public class Application extends Controller {
     public static Result dashboard() {
     	return ok(dashboard.render());
     }
+    
+    public static Result userExercise() {
+    	return ok(userExercise.render(inputUserExerciseForm));
+    }
+    
+    public static Result addUserExercise() {
+    	if (inputUserExerciseForm.hasErrors()) {
+    		String title = session("title");
+    		return badRequest(userExercise.render(inputUserExerciseForm));
+    	} else {
+    		Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class).bindFromRequest();
+    		String title = inputUserExerciseForm.get().title;
+    		Date timestamp = inputUserExerciseForm.get().timestamp;
+    		int duration_min = inputUserExerciseForm.get().duration_min;
+    		
+    		UserExercise.insert("userov email", 22, timestamp, duration_min);
+    		return redirect(routes.Application.dashboard());
+    	}
+    }
 	
 	public static Result addUser() {        
 	    if (registerForm.hasErrors()) {
@@ -88,7 +113,7 @@ public class Application extends Controller {
 	    }
     }
     
-  
+	
     
     public static class Login {
     	
@@ -113,5 +138,12 @@ public class Application extends Controller {
 	    public String address;
 		public Date birth_date;
 	}
+    
+    public static class InputUserExercise {
+    	
+    	public String title;
+    	public Date timestamp;
+    	public int duration_min;
+    }
 
 }
