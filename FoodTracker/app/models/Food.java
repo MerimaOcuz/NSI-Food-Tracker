@@ -1,7 +1,15 @@
 package models;
 
+import java.util.Date;
+import java.util.*;
+import play.db.ebean.*;
+import com.avaje.ebean.*;
+import javax.persistence.*;
+
+@Entity
 public class Food {
 	
+	@Id
 	private String id;
 	private String name;
 	private int calories;

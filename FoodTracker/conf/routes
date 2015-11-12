@@ -18,3 +18,7 @@ POST    /register                      controllers.Application.addUser()
 
 #Dashboard
 GET		/dashboard					controllers.Application.dashboard()
+
+#User Exercise
+GET		/userExercise				controllers.Application.userExercise()
+POST	/userExercise				controllers.Application.addUserExercise()

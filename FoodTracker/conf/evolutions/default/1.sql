@@ -3,6 +3,21 @@
 
 # --- !Ups
 
+create table exercise (
+  id                        integer auto_increment not null,
+  title                     varchar(255),
+  description               varchar(255),
+  calories_per_minute       integer,
+  constraint pk_exercise primary key (id))
+;
+
+create table food (
+  id                        varchar(255) not null,
+  name                      varchar(255),
+  calories                  integer,
+  constraint pk_food primary key (id))
+;
+
 create table user (
   email                     varchar(255) not null,
   password                  varchar(255),
@@ -15,6 +30,15 @@ create table user (
   constraint pk_user primary key (email))
 ;
 
+create table user_exercise (
+  id                        integer auto_increment not null,
+  user_id                   varchar(255),
+  exercise_id               integer,
+  timestamp                 datetime(6),
+  duration_min              integer,
+  constraint pk_user_exercise primary key (id))
+;
+
 
 
 
@@ -22,7 +46,13 @@ create table user (
 
 SET FOREIGN_KEY_CHECKS=0;
 
+drop table exercise;
+
+drop table food;
+
 drop table user;
+
+drop table user_exercise;
 
 SET FOREIGN_KEY_CHECKS=1;
 
