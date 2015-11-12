@@ -11,7 +11,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /login                  	@controllers.Application.login()
 POST    /login                      controllers.Application.authenticate()
 
-
+GET     /logout                    controllers.Application.logout()
 #Registration page
 GET     /register                  controllers.Application.register()
 POST    /register                      controllers.Application.addUser()
@@ -22,3 +22,6 @@ GET		/dashboard					controllers.Application.dashboard()
 #User Exercise
 GET		/userExercise				controllers.Application.userExercise()
 POST	/userExercise				controllers.Application.addUserExercise()
+
+#Profile
+GET		/profil				@controllers.Application.profil()

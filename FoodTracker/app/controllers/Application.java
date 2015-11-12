@@ -28,7 +28,10 @@ public class Application extends Controller {
          return ok(login.render(loginForm));
     }
     
-    
+    public Result profil() {
+        return ok(profil.render());
+   }
+   
     public static Result authenticate() {
         Form<Login> loginForm = form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {
@@ -42,7 +45,13 @@ public class Application extends Controller {
         }
     }
     
-    
+    public static Result logout() {
+        session().clear();
+        flash("success", "You've been logged out");
+        return redirect(
+            routes.Application.login()
+        );
+    }
     /*public Result authenticate() {
         
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
