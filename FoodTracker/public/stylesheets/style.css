@@ -5,16 +5,23 @@
   padding: 30;
   font-weight: 300;
 }
+
+html {
+	padding:0px;
+}
 body {
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
+  padding: 0px;
+  background-color:#53D6A5;
 }
 body ::-webkit-input-placeholder {
   /* WebKit browsers */
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
+  padding: 0px;
 }
 body :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
@@ -29,22 +36,23 @@ body ::-moz-placeholder {
   color: white;
   opacity: 1;
   font-weight: 300;
+  padding: 0px;
 }
 body :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
+  padding: 0px;
 }
 .wrapper {
   background: #50a3a2;
   background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
   background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
   position: absolute;
-  top: 58%;
-  left: -100;
-  width: 120%;
-  height: 600px;
+  top: 507px;
+  width: 100%;
+  height: 700px;
   margin-top: -300px;
   overflow: hidden;
 }
@@ -56,7 +64,7 @@ body :-ms-input-placeholder {
 .container {
   max-width: 400px;
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 10px 0;
   height: 400px;
   text-align: center;
 }
@@ -228,4 +236,10 @@ form button:hover {
     -webkit-transform: translateY(-700px) rotate(600deg);
             transform: translateY(-700px) rotate(600deg);
   }
+}
+
+header {
+	background-image:url('../images/hrana1.jpg'); background-repeat:no-repeat; background-position:left top; background-size:cover; padding: 0px;
+    height: 207px; padding:0px;
+
 }

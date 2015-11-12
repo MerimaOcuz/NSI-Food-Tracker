@@ -3,17 +3,18 @@
 <html>
     <head>
         <title>Food Tracker</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/styleRegister.css")">
-        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/styleRegister.js")"></script>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/style.css")">
+        <script type="text/javascript" src="@routes.Assets.versioned("javascripts/style.js")"></script>
         
     </head>
     <body>
         <header>
-            <a href="@routes.Application.index" id="logo">FoodTracker</a>
+        	<div class = "logo"> </div>
+            <a href="@routes.Application.index" id="logo" style="position:absolute; top:50px; left:46%; margin-left:-400px; padding:0px;"><img src="@routes.Assets.versioned("images/food_tracker_logo.png")" style="border:0px; padding:0px;" /></a>
         </header>
    		<div class="wrapper">
 			<div class="container">
-			<h1>Sign Up to FoodTracker</h1>
+			<h1>Sign Up</h1>
 			  @helper.form(routes.Application.addUser) {
 				<!--<div id="section_title" style="margin-top: 30px;"> Register
 					<a href="@routes.Application.login"> Login </a>
@@ -28,7 +29,7 @@
 					<input type="surname" name="surname" placeholder="Surname">
 				  </div>
 				  <div class="field">
-					<label for="birth_date"> Birthday (yyyy-mm-dd) </label>
+					<label for="birth_date"> Birthday (mm/dd/yyyy) </label>
 					<input type="date" name="birth_date" placeholder="Birthday" value="@form("birth_date").value">
 				  </div>
 				  <div class="field">

@@ -108,7 +108,7 @@ public class Application extends Controller {
 			
 	        User.insert(name, surname, birth_date, email, password, phone, address, "User");
 	        return redirect(
-	            routes.Application.index()
+	            routes.Application.login()
 	        );
 	    }
     }
