@@ -14,6 +14,13 @@ public class Exercise {
 	private String description;
 	private int calories_per_minute;
 	
+	public Exercise(int id, String title, String description, int calories_per_minute) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.calories_per_minute = calories_per_minute;
+	}
+	
 	public int getId() {
 		return id;
 	}

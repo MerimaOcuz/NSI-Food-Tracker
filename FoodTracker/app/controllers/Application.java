@@ -20,6 +20,11 @@ public class Application extends Controller {
 	static Form<Login> loginForm = form(Login.class);
 	static Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class);
 	
+	//User u1 = new User("John", "Doe", null, "johndoe@nothing.com", "1234", "033222333", "nowhere", "User");
+	//public List<User> users = Ebean.find(User.class).findList();
+	
+
+	
     public Result index() {
         return ok(index.render("Food Tracker Application"));
     }
@@ -82,20 +87,26 @@ public class Application extends Controller {
     }
     
     public static Result userExercise() {
-    	return ok(userExercise.render(inputUserExerciseForm));
+    	List<UserExercise> userExercises = Ebean.find(UserExercise.class).findList();
+    	return ok(userExercise.render(userExercises, inputUserExerciseForm));
     }
     
     public static Result addUserExercise() {
+    	List<UserExercise> userExercises = Ebean.find(UserExercise.class).findList();
     	if (inputUserExerciseForm.hasErrors()) {
     		String title = session("title");
-    		return badRequest(userExercise.render(inputUserExerciseForm));
+    		return badRequest(userExercise.render(userExercises, inputUserExerciseForm));
     	} else {
     		Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class).bindFromRequest();
     		String title = inputUserExerciseForm.get().title;
     		Date timestamp = inputUserExerciseForm.get().timestamp;
     		int duration_min = inputUserExerciseForm.get().duration_min;
     		
-    		UserExercise.insert("userov email", 22, timestamp, duration_min);
+    		Exercise vjezba = Ebean.find(Exercise.class).where().eq("title", title).findUnique();	// unese se naziv vjezbe koja se radila pa se naðe vjezba u bazi sa tim nazivom
+    		
+    		String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate()
+    		
+    		if (vjezba !=null) UserExercise.insert(uid, vjezba.getId(), title, timestamp, duration_min);
     		return redirect(routes.Application.dashboard());
     	}
     }
@@ -114,6 +125,7 @@ public class Application extends Controller {
 	        String phone = registerForm.get().phone;
 	        String address = registerForm.get().address;
 			Date birth_date = registerForm.get().birth_date;
+			
 			
 	        User.insert(name, surname, birth_date, email, password, phone, address, "User");
 	        return redirect(
@@ -154,5 +166,5 @@ public class Application extends Controller {
     	public Date timestamp;
     	public int duration_min;
     }
-
+    
 }

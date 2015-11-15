@@ -1,4 +1,4 @@
-@(form: Form[Application.InputUserExercise])
+@(userExercises: List[UserExercise], form: Form[Application.InputUserExercise])
 
 <!DOCTYPE html>
 <html>
@@ -74,21 +74,30 @@
 					<div class="panel-body">
 							@helper.form(routes.Application.addUserExercise) {
 							<div class="input-form form-group">
-								<div>
+								<!-- <div>
 								Exercise
 								<div class="dropdown">
   								<button class="form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" placeholder="Exercise ID">
 	    						Pick exercise
 	    						<span class="caret"></span>
 	  							</button>
-								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								    <li><a href="#">Trcanje</a></li>
-								    <li><a href="#">Another action</a></li>
-								    <li><a href="#">Something else here</a></li>
-								    <li><a href="#">Separated link</a></li>
-								  </ul>
+
+	  							@helper.form(action = routes.Application.addUserExercise(), 'id -> "myForm") {
+								  
+								    <select>
+        								<option>trcanje</option>
+        								<option>skakanje</option>
+        								<option>plivanje</option>
+    								</select>
+								  
 								  <br>
 								</div> 
+								}-->
+								<div>
+								Input exercise
+								<input type="text" class ="form-control" name="title" placeholder="Exercise">
+								<br>
+								</div>
 								
 								<div>
 								Date
@@ -109,7 +118,41 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	
 			
+		<div class="column">
+			<div class="col-md-4">
+				<div class="panel panel-success">
+					<div class="panel-heading">Done exercises</div>
+					
+					<table class="table table-bordered">
+					  <thead>
+						<tr>
+							<th>Time</th>
+							<th>Activity</th>
+						</tr>
+					  </thead>
+					  <tbody>
+					  
+					  	@for(userExercise <- userExercises){
+					  		<tr>
+								<td>@userExercise.getTimestamp()</td>
+								<td>@userExercise.getTitle()</td>
+							</tr>
+   					 		
+						}
+						
+						<tr>
+							<td colspan="2"><a href="#">See all..</a></td>
+						</tr>
+					  </tbody>
+					</table>
+				</div>
+		</div>
+	</div>
+	
+	</div>
 			
 		
 </body>

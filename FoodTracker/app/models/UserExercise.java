@@ -14,13 +14,16 @@ public class UserExercise {
 	private int id;
 	private String user_id;
 	private int exercise_id;
+	private String title;
 	private Date timestamp;
 	private int duration_min;
 	
-	public UserExercise(String user_id, int exercise_id, Date timestamp, int duration_min) {
+	public UserExercise(String user_id, int exercise_id, String title, Date timestamp, int duration_min) {
 		//this.id = id;
+		
 		this.user_id = user_id;
 		this.exercise_id = exercise_id;
+		this.title = title;
 		this.timestamp = timestamp;
 		this.duration_min = duration_min;
 	}
@@ -38,11 +41,19 @@ public class UserExercise {
 		this.user_id = user_id;
 	}
 	public int getExercise_id() {
-		return exercise_id;
+		return this.exercise_id;
 	}
 	public void setExercise_id(int exercise_id) {
 		this.exercise_id = exercise_id;
 	}
+	
+	public String getTitle() {
+		return this.title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
 	public Date getTimestamp() {
 		return timestamp;
 	}
@@ -56,8 +67,8 @@ public class UserExercise {
 		this.duration_min = duration_min;
 	}
 	
-	public static void insert(String user_id, int exercise_id, Date timestamp, int duration_min) {
-		UserExercise u = new UserExercise(user_id, exercise_id, timestamp, duration_min);
+	public static void insert(String user_id, int exercise_id, String title, Date timestamp, int duration_min) {
+		UserExercise u = new UserExercise(user_id, exercise_id, title, timestamp, duration_min);
 		Ebean.save(u);
 	}
 

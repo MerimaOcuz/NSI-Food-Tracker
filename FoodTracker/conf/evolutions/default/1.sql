@@ -34,6 +34,7 @@ create table user_exercise (
   id                        integer auto_increment not null,
   user_id                   varchar(255),
   exercise_id               integer,
+  title                     varchar(255),
   timestamp                 datetime(6),
   duration_min              integer,
   constraint pk_user_exercise primary key (id))
