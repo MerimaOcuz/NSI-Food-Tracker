@@ -20,10 +20,6 @@ public class Application extends Controller {
 	static Form<Login> loginForm = form(Login.class);
 	static Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class);
 	
-	//User u1 = new User("John", "Doe", null, "johndoe@nothing.com", "1234", "033222333", "nowhere", "User");
-	//public List<User> users = Ebean.find(User.class).findList();
-	
-
 	
     public Result index() {
         return ok(index.render("Food Tracker Application"));
@@ -86,27 +82,30 @@ public class Application extends Controller {
     	return ok(dashboard.render());
     }
     
-    public static Result userExercise() {
-    	List<UserExercise> userExercises = Ebean.find(UserExercise.class).findList();
-    	return ok(userExercise.render(userExercises, inputUserExerciseForm));
+    public static Result userExercise() { 	
+    	String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate
+    	List<UserExercise> userExercises = Ebean.find(UserExercise.class).where().eq("user_id", uid ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
+    	List<Exercise> exercises = Ebean.find(Exercise.class).findList(); // lista svih aktivnosti koje korisnik moze izabrati prilikom unosa
+    	return ok(userExercise.render(userExercises, exercises, inputUserExerciseForm));
     }
     
     public static Result addUserExercise() {
-    	List<UserExercise> userExercises = Ebean.find(UserExercise.class).findList();
+    	String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate
+    	
+    	List<UserExercise> userExercises = Ebean.find(UserExercise.class).where().eq("user_id", uid ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
+    	List<Exercise> exercises = Ebean.find(Exercise.class).findList(); // lista svih aktivnosti koje korisnik moze izabrati prilikom unosa
     	if (inputUserExerciseForm.hasErrors()) {
-    		String title = session("title");
-    		return badRequest(userExercise.render(userExercises, inputUserExerciseForm));
+    		String title = session("title");	// u sesiju se unosi i naziv vjezbe zbog dalje provjere
+    		return badRequest(userExercise.render(userExercises, exercises, inputUserExerciseForm));
     	} else {
     		Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class).bindFromRequest();
     		String title = inputUserExerciseForm.get().title;
     		Date timestamp = inputUserExerciseForm.get().timestamp;
     		int duration_min = inputUserExerciseForm.get().duration_min;
     		
-    		Exercise vjezba = Ebean.find(Exercise.class).where().eq("title", title).findUnique();	// unese se naziv vjezbe koja se radila pa se naðe vjezba u bazi sa tim nazivom
-    		
-    		String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate()
-    		
-    		if (vjezba !=null) UserExercise.insert(uid, vjezba.getId(), title, timestamp, duration_min);
+    		Exercise vjezba = Ebean.find(Exercise.class).where().eq("title", title).findUnique();	// unese se naziv vjezbe koja se radila pa se nadje vjezba u bazi sa tim nazivom
+    		    		    		
+    		if (vjezba !=null) UserExercise.insert(uid, vjezba.getId(), title, timestamp, duration_min);	// unos vjezbe u tabelu
     		return redirect(routes.Application.dashboard());
     	}
     }
