@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@(user: String, name:String, surname:String, birth:String, pass:String){
+<!DOCTYPE HTML>
 <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
@@ -50,7 +51,7 @@
 		<div class="navbar navbar-default navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-form navbar-left" style="padding-top:8px; margin-left:-15px;"><strong><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> NSI - Foodtracker</strong></div>
-				<div class="navbar-form navbar-right" style="margin-top:15px; right:-25px;"> <a href="profil" > <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User Userovic | <a href="index.html" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-off"></span> <a href="@routes.Application.logout()"> Logout</a></div>
+				<div class="navbar-form navbar-right" style="margin-top:15px; right:-25px;"> <a href="profil" > <span class="glyphicon glyphicon-user" aria-hidden="true"></span> @name | <a href="index.html" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-off"></span> <a href="@routes.Application.logout()"> Logout</a></div>
 			</div>
 		</div>
 	</div>
@@ -108,25 +109,25 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">First name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="Jane">
+              <input class="form-control" type="text" value=@name>
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Last name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="Bishop">
+              <input class="form-control" type="text" value=@surname>
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Birthday:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="01/02/2002">
+              <input class="form-control" type="text" value=@birth>
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" value="janesemail">
+              <input class="form-control" type="text" value=@user>
             </div>
           </div>
           <div class="form-group">
@@ -147,21 +148,15 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-md-3 control-label">Username:</label>
-            <div class="col-md-8">
-              <input class="form-control" type="text" value="janeuser">
-            </div>
-          </div>
-          <div class="form-group">
             <label class="col-md-3 control-label">Password:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" value="11111122333">
+              <input class="form-control" type="password" value=@pass>
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Confirm password:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" value="11111122333">
+              <input class="form-control" type="password" value="">
             </div>
           </div>
           <div class="form-group">
@@ -183,3 +178,4 @@
         
     </body>
 </html>
+}

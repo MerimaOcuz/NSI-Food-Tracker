@@ -11,7 +11,8 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   javaWs,
-  "mysql" % "mysql-connector-java" % "5.1.18"
+  "mysql" % "mysql-connector-java" % "5.1.18",
+  "com.typesafe.play" %% "play-mailer" % "3.0.1"
   )
 
 lazy val myProject = (project in file("."))

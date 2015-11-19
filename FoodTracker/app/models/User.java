@@ -69,5 +69,8 @@ public class User {
 		        					.where().eq("email",email).eq("password",password).findUnique();
 		        return users;
 		    }
+	public static User getUser(String email) {
+        return Ebean.find(User.class).where().eq("email", email).findUnique();
+    }
 }
 

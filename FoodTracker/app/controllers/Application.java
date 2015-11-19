@@ -10,12 +10,21 @@ import static play.data.Form.*;
 import play.data.Form;
 import play.mvc.Controller;
 import java.util.*;
+import java.text.DateFormat;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import play.db.ebean.*;
 import com.avaje.ebean.*;
 import javax.persistence.*;
 
+import javax.inject.Inject;
+import play.libs.mailer.MailerClient;
+
 public class Application extends Controller {
+
+    @Inject static MailerClient mailerClient;
+
 	static Form<Register> registerForm = form(Register.class);
 	static Form<Login> loginForm = form(Login.class);
 	static Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class);
@@ -30,7 +39,21 @@ public class Application extends Controller {
     }
     
     public Result profil() {
-        return ok(profil.render());
+        String user = session("email");
+        String name = null;
+        String surname = null;
+        Date birth_date =null;
+        String password =null;
+        if(user != null)
+        {
+            name= User.getUser(user).getName();
+            surname =User.getUser(user).getSurname();
+            birth_date =User.getUser(user).getBirthDate();
+            password =User.getUser(user).getPassword();
+        }
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String birth = df.format(birth_date);
+        return ok(profil.render(user, name, surname, birth, password));
    }
    
     public static Result authenticate() {
@@ -79,7 +102,13 @@ public class Application extends Controller {
     }
     
     public static Result dashboard() {
-    	return ok(dashboard.render());
+        String user = session("email");
+        String name = null;
+        if(user != null)
+        {
+            name= User.getUser(user).getName();
+        }
+    	return ok(dashboard.render(user, name));
     }
     
     public static Result userExercise() { 	
@@ -127,6 +156,10 @@ public class Application extends Controller {
 			
 			
 	        User.insert(name, surname, birth_date, email, password, phone, address, "User");
+
+            Mails mails = new Mails();
+            //mails.sendEmail(mailerClient, email); //zakomentarisano zato sto trenutno baca null exception
+
 	        return redirect(
 	            routes.Application.login()
 	        );
