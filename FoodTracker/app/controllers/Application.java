@@ -139,7 +139,8 @@ public class Application extends Controller {
             String name = inputFoodForm.get().name;
             int calories = inputFoodForm.get().calories;
             MultipartFormData body = request().body().asMultipartFormData();
-            String myUploadPath="C:/Users/Public/Pictures/Pictures";
+            //String myUploadPath="C:/Users/Public/Pictures/Pictures/";
+            String myUploadPath = Play.application().configuration().getString("myUploadPath");
             FilePart picture = body.getFile("image");
                 File file = picture.getFile();
                 String fileName = picture.getFilename();
