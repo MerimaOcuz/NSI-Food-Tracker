@@ -28,3 +28,7 @@ GET		/profil				@controllers.Application.profil()
 
 #LastAccountActivity
 GET		/lastAccActivity 		controllers.Application.lastAccActivity()
+
+#Food
+GET		/insertFood				controllers.Application.food()
+POST 	/insertFood				controllers.Application.insertFood()

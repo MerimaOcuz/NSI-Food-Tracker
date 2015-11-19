@@ -28,7 +28,7 @@ public class Application extends Controller {
 	static Form<Register> registerForm = form(Register.class);
 	static Form<Login> loginForm = form(Login.class);
 	static Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class);
-	
+	static Form<Food> foodForm =form(Food.class);
 	
     public Result index() {
         return ok(index.render("Food Tracker Application"));
@@ -122,6 +122,32 @@ public class Application extends Controller {
         }
         return ok(lastAccActivity.render(name, userExercises));
     }
+
+    public static Result insertFood() {        
+        if (foodForm.hasErrors()) {
+            String user = session("email");
+            String role = session("role");
+            return badRequest(food.render(user));
+        } else {
+            Form<FoodInput> inputFoodForm = form(FoodInput.class).bindFromRequest();
+            String name = inputFoodForm.get().name;
+            int calories = inputFoodForm.get().calories;
+            //i jos image prihvatiti
+            
+            
+            Food.insert(name, calories);
+
+            return redirect(
+                routes.Application.food()
+            );
+        }
+    }
+    
+
+    public static Result food(){
+        String user = session("username");
+        return ok(food.render(user));
+    }
     
     public static Result userExercise() { 	
     	String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate
@@ -187,7 +213,7 @@ public class Application extends Controller {
 	    }
     }
     
-	
+    
     
     public static class Login {
     	
@@ -212,6 +238,13 @@ public class Application extends Controller {
 	    public String address;
 		public Date birth_date;
 	}
+
+
+    public static class FoodInput {
+        public String name;
+        public int calories;
+        //i jos fotka
+    }
     
     public static class InputUserExercise {
     	

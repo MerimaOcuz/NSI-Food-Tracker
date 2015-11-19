@@ -10,14 +10,21 @@ import javax.persistence.*;
 public class Food {
 	
 	@Id
-	private String id;
+	@GeneratedValue
+	private int id;
 	private String name;
 	private int calories;
+
+	public Food(String name, int calories) {
+      this.name = name;
+      this.calories = calories;
+      //i fotka
+    }
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -32,5 +39,10 @@ public class Food {
 	public void setCalories(int calories) {
 		this.calories = calories;
 	}
+
+	public static void insert(String name, int calories) {
+        Food f = new Food(name, calories);
+		Ebean.save(f);
+    }
 	
 }

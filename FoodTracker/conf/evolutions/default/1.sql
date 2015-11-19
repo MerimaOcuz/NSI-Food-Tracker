@@ -12,7 +12,7 @@ create table exercise (
 ;
 
 create table food (
-  id                        varchar(255) not null,
+  id                        integer auto_increment not null,
   name                      varchar(255),
   calories                  integer,
   constraint pk_food primary key (id))
