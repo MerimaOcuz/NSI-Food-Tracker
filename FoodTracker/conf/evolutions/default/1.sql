@@ -15,6 +15,7 @@ create table food (
   id                        integer auto_increment not null,
   name                      varchar(255),
   calories                  integer,
+  photo                     varchar(255),
   constraint pk_food primary key (id))
 ;
 

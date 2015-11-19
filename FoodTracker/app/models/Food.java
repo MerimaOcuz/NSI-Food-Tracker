@@ -14,10 +14,12 @@ public class Food {
 	private int id;
 	private String name;
 	private int calories;
+	private String photo;
 
-	public Food(String name, int calories) {
+	public Food(String name, int calories, String photo) {
       this.name = name;
       this.calories = calories;
+      this.photo = photo;
       //i fotka
     }
 	
@@ -33,6 +35,12 @@ public class Food {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	public int getCalories() {
 		return calories;
 	}
@@ -40,8 +48,8 @@ public class Food {
 		this.calories = calories;
 	}
 
-	public static void insert(String name, int calories) {
-        Food f = new Food(name, calories);
+	public static void insert(String name, int calories, String photo) {
+        Food f = new Food(name, calories, photo);
 		Ebean.save(f);
     }
 	

@@ -20,6 +20,12 @@ import javax.persistence.*;
 
 import javax.inject.Inject;
 import play.libs.mailer.MailerClient;
+import play.mvc.Http.*;
+import play.mvc.Http.MultipartFormData.*;
+import java.lang.Object;
+import java.io.File;
+import java.util.List;
+
 
 public class Application extends Controller {
 
@@ -132,10 +138,17 @@ public class Application extends Controller {
             Form<FoodInput> inputFoodForm = form(FoodInput.class).bindFromRequest();
             String name = inputFoodForm.get().name;
             int calories = inputFoodForm.get().calories;
+            MultipartFormData body = request().body().asMultipartFormData();
+            String myUploadPath="C:/Users/Public/Pictures/Pictures";
+            FilePart picture = body.getFile("image");
+                File file = picture.getFile();
+                String fileName = picture.getFilename();
+                file.renameTo(new File(myUploadPath, fileName));
+                Food.insert(name, calories, fileName);
             //i jos image prihvatiti
             
             
-            Food.insert(name, calories);
+            //Food.insert(name, calories);
 
             return redirect(
                 routes.Application.food()
@@ -248,6 +261,7 @@ public class Application extends Controller {
     public static class FoodInput {
         public String name;
         public int calories;
+        public String photo;
         //i jos fotka
     }
     
