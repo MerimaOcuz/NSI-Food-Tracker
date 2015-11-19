@@ -25,3 +25,6 @@ POST	/userExercise				controllers.Application.addUserExercise()
 
 #Profile
 GET		/profil				@controllers.Application.profil()
+
+#LastAccountActivity
+GET		/lastAccActivity 		controllers.Application.lastAccActivity()

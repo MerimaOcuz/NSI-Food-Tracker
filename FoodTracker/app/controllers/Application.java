@@ -108,7 +108,19 @@ public class Application extends Controller {
         {
             name= User.getUser(user).getName();
         }
-    	return ok(dashboard.render(user, name));
+        List<UserExercise> userExercises = Ebean.find(UserExercise.class).where().eq("user_id", user).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
+    	return ok(dashboard.render(user, name, userExercises));
+    }
+
+    public static Result lastAccActivity() {
+        String user = session("email");
+        String name = null;
+        List<UserExercise> userExercises = Ebean.find(UserExercise.class).where().eq("user_id", user).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
+        if(user != null)
+        {
+            name= User.getUser(user).getName();
+        }
+        return ok(lastAccActivity.render(name, userExercises));
     }
     
     public static Result userExercise() { 	
@@ -144,7 +156,7 @@ public class Application extends Controller {
     		Exercise vjezba = Ebean.find(Exercise.class).where().eq("title", title).findUnique();	// unese se naziv vjezbe koja se radila pa se nadje vjezba u bazi sa tim nazivom
     		    		    		
     		if (vjezba !=null) UserExercise.insert(uid, vjezba.getId(), title, timestamp, duration_min);	// unos vjezbe u tabelu
-    		return redirect(routes.Application.dashboard());
+    		return redirect(routes.Application.userExercise());
     	}
     }
 	

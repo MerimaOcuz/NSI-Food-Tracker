@@ -1,4 +1,4 @@
-@(user: String, name:String){
+@(user: String, name:String, userExercises: List[UserExercise])
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -59,7 +59,7 @@
 						<li><a href="@routes.Application.userExercise()">Exercises</a></li>
 						<li><a href="#">Food consumption</a></li>
 						<li><a href="#">Calorie consumption</a></li>
-						<li><a href="#">Last account activity</a></li>
+						<li><a href="@routes.Application.lastAccActivity()">Last account activity</a></li>
 						<li><a href="#">Calendar</a></li>
 						<li><a href="@routes.Application.profil()">Profile</a></li>
 					</ul>
@@ -223,23 +223,14 @@
 						</tr>
 					  </thead>
 					  <tbody>
+							@for(userExercise <- userExercises){
+						  		<tr>
+									<td>@userExercise.getTimestamp()</td>
+									<td><span class="glyphicon glyphicon glyphicon-leaf" aria-hidden="true"></span>    @userExercise.getTitle() @userExercise.getDuration_min() min </td>
+								</tr>
+							}
 						<tr>
-							<td>1:47 5.11.2015.</td>
-							<td><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> Added food intake</td>
-						</tr>
-						
-						<tr>
-							<td>20:00 4.11.2015.</td>
-							<td><span class="glyphicon glyphicon glyphicon-leaf" aria-hidden="true"></span> Exercised 1 hour</td>
-						</tr>
-						
-						<tr>
-							<td>15:00 4.11.2015.</td>
-							<td><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> Added food intake</td>
-						</tr>
-						
-						<tr>
-							<td colspan="2"><a href="#">See all..</a></td>
+							<td colspan="2"><a href="@routes.Application.lastAccActivity()">See all..</a></td>
 						</tr>
 					  </tbody>
 					</table>
@@ -250,4 +241,3 @@
 	
 </body>
 </html>
-}
