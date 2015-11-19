@@ -145,8 +145,13 @@ public class Application extends Controller {
     
 
     public static Result food(){
-        String user = session("username");
-        return ok(food.render(user));
+        String user = session("email");
+        String name = null;
+        if(user != null)
+        {
+            name= User.getUser(user).getName();
+        }
+        return ok(food.render(name));
     }
     
     public static Result userExercise() { 	
