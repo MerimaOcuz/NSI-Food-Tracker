@@ -1,4 +1,4 @@
-@(userExercises: List[UserExercise], exercises:List[Exercise], form: Form[Application.InputUserExercise])
+@(name:String, userExercises: List[UserExercise], exercises:List[Exercise], form: Form[Application.InputUserExercise])
 
 <!DOCTYPE html>
 <html>
@@ -35,7 +35,7 @@
 		<div class="navbar navbar-default navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-form navbar-left" style="padding-top:8px; margin-left:-15px;"><strong><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> NSI - Foodtracker</strong></div>
-				<div class="navbar-form navbar-right" style="margin-top:15px; right:-25px;"> <a href="profil" > <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User Userovic | <a href="index.html" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-off"></span> <a href="@routes.Application.logout()"> Logout</a></div>
+				<div class="navbar-form navbar-right" style="margin-top:15px; right:-25px;"> <a href="profil" > <span class="glyphicon glyphicon-user" aria-hidden="true"></span> @name | <a href="index.html" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-off"></span> <a href="@routes.Application.logout()"> Logout</a></div>
 			</div>
 		</div>
 	</div>

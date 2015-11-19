@@ -113,19 +113,28 @@ public class Application extends Controller {
     
     public static Result userExercise() { 	
     	String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate
-    	List<UserExercise> userExercises = Ebean.find(UserExercise.class).where().eq("user_id", uid ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
+    	String name=null;
+        if(uid != null)
+        {
+            name= User.getUser(uid).getName();
+        }
+        List<UserExercise> userExercises = Ebean.find(UserExercise.class).where().eq("user_id", uid ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
     	List<Exercise> exercises = Ebean.find(Exercise.class).findList(); // lista svih aktivnosti koje korisnik moze izabrati prilikom unosa
-    	return ok(userExercise.render(userExercises, exercises, inputUserExerciseForm));
+    	return ok(userExercise.render(name, userExercises, exercises, inputUserExerciseForm));
     }
     
     public static Result addUserExercise() {
     	String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate
-    	
+    	String name=null;
+        if(uid != null)
+        {
+            name= User.getUser(uid).getName();
+        }
     	List<UserExercise> userExercises = Ebean.find(UserExercise.class).where().eq("user_id", uid ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
     	List<Exercise> exercises = Ebean.find(Exercise.class).findList(); // lista svih aktivnosti koje korisnik moze izabrati prilikom unosa
     	if (inputUserExerciseForm.hasErrors()) {
     		String title = session("title");	// u sesiju se unosi i naziv vjezbe zbog dalje provjere
-    		return badRequest(userExercise.render(userExercises, exercises, inputUserExerciseForm));
+    		return badRequest(userExercise.render(name, userExercises, exercises, inputUserExerciseForm));
     	} else {
     		Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class).bindFromRequest();
     		String title = inputUserExerciseForm.get().title;
