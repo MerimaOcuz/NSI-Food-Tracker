@@ -74,31 +74,17 @@
 					<div class="panel-body">
 							@helper.form(routes.Application.addUserExercise) {
 							<div class="input-form form-group">
-								<!-- <div>
-								Exercise
-								<div class="dropdown">
-  								<button class="form-control" type="button" id="dropdownMenu1" data-toggle="dropdown" placeholder="Exercise ID">
-	    						Pick exercise
-	    						<span class="caret"></span>
-	  							</button>
-
-	  							@helper.form(action = routes.Application.addUserExercise(), 'id -> "myForm") {
-								  
-								    <select>
-        								<option>trcanje</option>
-        								<option>skakanje</option>
-        								<option>plivanje</option>
-    								</select>
-								  
-								  <br>
-								</div> 
-								}-->
-								<div>
-								Input exercise
-								<input type="text" class ="form-control" name="title" placeholder="Exercise">
-								<br>
-								</div>
-								
+					
+              					<div>
+              					Exercise
+                				<select class="form-control" name="title">
+                					@for(exercise <- exercises){
+        							<option>@exercise.getTitle()</option>
+    								}
+    							</select>
+    							<br>	
+              					</div>
+         						
 								<div>
 								Date
 								<input type="date" class ="form-control" name="timestamp" placeholder="Timestamp">
@@ -152,29 +138,9 @@
 		</div>
 	</div>
 	
-	<div class="column">
-			<div class="col-md-4">
-				<div class="panel panel-success">
-					<div class="panel-heading">Offered exercies</div>
-					<table class="table table-bordered">
-					  <tbody>
-					  
-					  	@for(exercise <- exercises){
-					  		<tr>
-								<td>@exercise.getTitle()</td>
-							</tr>
-						}
-						
-						<tr>
-							<td colspan="2"><a href="#">See all..</a></td>
-						</tr>
-					  </tbody>
-					</table>
-				</div>
-		</div>
 	</div>
-	
-	</div>
+		
+		<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 			
 </body>
 </html>
