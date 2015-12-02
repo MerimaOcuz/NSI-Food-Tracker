@@ -20,8 +20,9 @@ public class User {
 	private String address;
 	private String type;
 	private String phone_number;
+	private String gender;
 	
-	public User(String name, String surname, Date birth_date, String email, String password, String phone, String address, String type) {
+	public User(String name, String surname, Date birth_date, String email, String password, String phone, String address, String gender, String type) {
       this.email = email;
       this.name = name;
       this.surname = surname;
@@ -30,6 +31,7 @@ public class User {
       this.address = address;
 	  this.birth_date = birth_date;
 	  this.type = type;
+	  this.gender=gender;
     }
 	
 	//public String getId() { return this.id; }
@@ -55,13 +57,16 @@ public class User {
 	
 	public String getPhoneNumber() { return this.phone_number; }
 	public void setPhoneNumber(String phone_number) { this.phone_number = phone_number; }
+
+	public String getGender() { return this.gender; }
+	public void setGender(String gender) { this.gender = gender; }
 	
 	public String getType() { return this.type; }
 	public void setType(String type) { this.type = type; }
 	
 	public static void insert(String name, String surname, Date birth_date, String email, String password, String phone, 
-      String address, String role) {
-        User u = new User(name, surname, birth_date, email, password, phone, address, "User");
+      String address, String gender, String role) {
+        User u = new User(name, surname, birth_date, email, password, phone, address, gender, "User");
 		Ebean.save(u);
     }
 	public static User check(String email, String password) {

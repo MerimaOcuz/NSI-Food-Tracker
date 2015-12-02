@@ -32,6 +32,14 @@
 					<label for="birth_date"> Birthday (mm/dd/yyyy) </label>
 					<input type="date" name="birth_date" placeholder="Birthday" value="@form("birth_date").value">
 				  </div>
+				   <div class="field">
+                        <label for="gender"> Gender </label>
+                            <select class="form-control" name="gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                    
 				  <div class="field">
 					<label for="email"> Email </label>
 					<input type="email" name="email" placeholder="Email" value="@form("email").value">
@@ -48,6 +56,8 @@
 					<label for="address"> Address </label>
 					<input type="address" name="address" placeholder="Address">
 				  </div>
+				  
+				 
 				  <div class="field">
 					<button type="submit" id="submit-button">Register</button>
 				  </div>

@@ -50,16 +50,20 @@ public class Application extends Controller {
         String surname = null;
         Date birth_date =null;
         String password =null;
+        String gender=null;
+        
         if(user != null)
         {
             name= User.getUser(user).getName();
             surname =User.getUser(user).getSurname();
             birth_date =User.getUser(user).getBirthDate();
             password =User.getUser(user).getPassword();
+            gender =User.getUser(user).getGender();
+            
         }
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String birth = df.format(birth_date);
-        return ok(profil.render(user, name, surname, birth, password));
+        return ok(profil.render(user, name, surname, birth, password, gender));
    }
    
     public static Result authenticate() {
@@ -219,9 +223,10 @@ public class Application extends Controller {
 	        String phone = registerForm.get().phone;
 	        String address = registerForm.get().address;
 			Date birth_date = registerForm.get().birth_date;
+			String gender=registerForm.get().gender;
 			
 			
-	        User.insert(name, surname, birth_date, email, password, phone, address, "User");
+	        User.insert(name, surname, birth_date, email, password, phone, address,gender, "User");
 
             Mails mails = new Mails();
             //mails.sendEmail(mailerClient, email); //zakomentarisano zato sto trenutno baca null exception
@@ -256,6 +261,7 @@ public class Application extends Controller {
 	    public String phone;
 	    public String address;
 		public Date birth_date;
+		public String gender;
 	}
 
 
