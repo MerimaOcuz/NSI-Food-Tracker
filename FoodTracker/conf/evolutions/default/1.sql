@@ -29,6 +29,8 @@ create table user (
   type                      varchar(255),
   phone_number              varchar(255),
   gender                    varchar(255),
+  current_weight            varchar(255),
+  desired_weight            varchar(255),
   constraint pk_user primary key (email))
 ;
 

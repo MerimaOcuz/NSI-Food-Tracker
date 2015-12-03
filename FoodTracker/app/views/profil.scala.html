@@ -1,4 +1,4 @@
-@(user: String, name:String, surname:String, birth:String, pass:String, gender:String){
+@(user: String, name:String, surname:String, birth:String, pass:String, gender:String, current_weight:String, desired_weight:String){
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -123,13 +123,26 @@
             <div class="col-lg-8">
               <input class="form-control" type="text" value=@birth>
             </div>
-            
+             </div>
             <div class="form-group">
             <label class="col-lg-3 control-label">Gender:</label>
             <div class="col-lg-8">
               <input class="form-control" type="text" value=@gender>
             </div>
-             
+                </div>
+                
+                 <div class="form-group">
+            <label class="col-lg-3 control-label">Current Weight:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value=@current_weight>
+            </div>
+                </div>
+                <div class="form-group">
+                <label class="col-lg-3 control-label">Desired Weight:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value=@desired_weight>
+            </div>
+                </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
@@ -143,10 +156,11 @@
               <input class="form-control" type="password" value=@pass>
             </div>
           </div>
+          
           <div class="form-group">
             <label class="col-md-3 control-label">Confirm password:</label>
             <div class="col-md-8">
-              <input class="form-control" type="password" value="">
+              <input class="form-control" type="password" value=@pass>
             </div>
           </div>
           <div class="form-group">

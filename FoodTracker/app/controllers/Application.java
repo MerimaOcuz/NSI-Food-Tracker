@@ -51,6 +51,8 @@ public class Application extends Controller {
         Date birth_date =null;
         String password =null;
         String gender=null;
+        String current_weight=null;
+        String desired_weight=null;
         
         if(user != null)
         {
@@ -59,11 +61,14 @@ public class Application extends Controller {
             birth_date =User.getUser(user).getBirthDate();
             password =User.getUser(user).getPassword();
             gender =User.getUser(user).getGender();
+            current_weight=User.getUser(user).getCurrent_weight();
+            desired_weight=User.getUser(user).getDesired_weight();
+            
             
         }
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String birth = df.format(birth_date);
-        return ok(profil.render(user, name, surname, birth, password, gender));
+        return ok(profil.render(user, name, surname, birth, password, gender, current_weight, desired_weight));
    }
    
     public static Result authenticate() {
@@ -224,13 +229,14 @@ public class Application extends Controller {
 	        String address = registerForm.get().address;
 			Date birth_date = registerForm.get().birth_date;
 			String gender=registerForm.get().gender;
+			String current_weight=registerForm.get().current_weight;
+			String desired_weight=registerForm.get().desired_weight;
 			
-			
-	        User.insert(name, surname, birth_date, email, password, phone, address,gender, "User");
+	        User.insert(name, surname, birth_date, email, password, phone, address,gender,current_weight, desired_weight, "User");
 
             Mails mails = new Mails();
             //mails.sendEmail(mailerClient, email); //zakomentarisano zato sto trenutno baca null exception
-
+            flash("success", "You've been registered!");
 	        return redirect(
 	            routes.Application.login()
 	        );
@@ -262,6 +268,8 @@ public class Application extends Controller {
 	    public String address;
 		public Date birth_date;
 		public String gender;
+		public String current_weight;
+		public String desired_weight;
 	}
 
 
