@@ -32,3 +32,7 @@ GET		/lastAccActivity 		controllers.Application.lastAccActivity()
 #Food
 GET		/insertFood				controllers.Application.food()
 POST 	/insertFood				controllers.Application.insertFood()
+
+#Insert Exercise
+GET		/insertExercise			controllers.Application.exercise()
+POST	/insertExercise			controllers.Application.insertExercise()

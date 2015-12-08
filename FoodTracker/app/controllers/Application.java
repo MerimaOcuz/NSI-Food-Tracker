@@ -34,7 +34,8 @@ public class Application extends Controller {
 	static Form<Register> registerForm = form(Register.class);
 	static Form<Login> loginForm = form(Login.class);
 	static Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class);
-	static Form<Food> foodForm =form(Food.class);
+	static Form<Food> foodForm = form(Food.class);
+	static Form<Exercise> exerciseForm = form(Exercise.class);
 	
     public Result index() {
         return ok(index.render("Food Tracker Application"));
@@ -165,7 +166,6 @@ public class Application extends Controller {
             );
         }
     }
-    
 
     public static Result food(){
         String user = session("email");
@@ -175,6 +175,35 @@ public class Application extends Controller {
             name= User.getUser(user).getName();
         }
         return ok(food.render(name));
+    }
+    
+    public static Result insertExercise() {
+    	if (exerciseForm.hasErrors()) {
+            String user = session("email");
+            String role = session("role");
+            return badRequest(exercise.render(user));
+        } else {
+            Form<ExerciseInput> inputExerciseForm = form(ExerciseInput.class).bindFromRequest();
+            String title = inputExerciseForm.get().title;
+            String description = inputExerciseForm.get().description;
+            int calories_per_minute = inputExerciseForm.get().calories_per_minute;
+            
+            Exercise.insert(title, description, calories_per_minute);
+            
+            return redirect(
+                routes.Application.exercise()
+            );
+        }
+    }
+    
+    public static Result exercise() {
+    	String user = session("email");
+        String name = null;
+        if(user != null)
+        {
+            name= User.getUser(user).getName();
+        }
+    	return ok(exercise.render(name));
     }
     
     public static Result userExercise() { 	
@@ -278,6 +307,12 @@ public class Application extends Controller {
         public int calories;
         public String photo;
         //i jos fotka
+    }
+    
+    public static class ExerciseInput {
+    	public String title;
+    	public String description;
+    	public int calories_per_minute;
     }
     
     public static class InputUserExercise {
