@@ -23,8 +23,9 @@ public class User {
 	private String gender;
 	private String current_weight;
 	private String desired_weight;
+	private String height;
 	
-	public User(String name, String surname, Date birth_date, String email, String password, String phone, String address, String gender, String current_weight, String desired_weight ,String type) {
+	public User(String name, String surname, Date birth_date, String email, String password, String phone, String address, String gender, String current_weight, String height, String type) {
       this.email = email;
       this.name = name;
       this.surname = surname;
@@ -35,7 +36,7 @@ public class User {
 	  this.type = type;
 	  this.gender=gender;
 	  this.current_weight=current_weight;
-	  this.desired_weight=desired_weight;
+	  this.height = height;
     }
 	
 	//public String getId() { return this.id; }
@@ -71,12 +72,15 @@ public class User {
 	public String getDesired_weight() { return this.desired_weight; }
 	public void setDesired_weight(String desired_weight) { this.desired_weight = desired_weight; }
 	
+	public String getHeight() { return this.height; }
+	public void setHeight(String height) { this.height = height; }
+	
 	public String getType() { return this.type; }
 	public void setType(String type) { this.type = type; }
 	
 	public static void insert(String name, String surname, Date birth_date, String email, String password, String phone, 
-      String address, String gender, String current_weight,String desired_weight, String role) {
-        User u = new User(name, surname, birth_date, email, password, phone, address, gender, current_weight, desired_weight, "User");
+      String address, String gender, String current_weight, String height, String role) {
+        User u = new User(name, surname, birth_date, email, password, phone, address, gender, current_weight, height, "User");
 		Ebean.save(u);
     }
 	public static User check(String email, String password) {

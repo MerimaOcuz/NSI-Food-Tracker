@@ -31,6 +31,7 @@ create table user (
   gender                    varchar(255),
   current_weight            varchar(255),
   desired_weight            varchar(255),
+  height                    varchar(255),
   constraint pk_user primary key (email))
 ;
 

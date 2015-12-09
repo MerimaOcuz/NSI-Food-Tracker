@@ -53,7 +53,7 @@ public class Application extends Controller {
         String password =null;
         String gender=null;
         String current_weight=null;
-        String desired_weight=null;
+        String height=null;
         
         if(user != null)
         {
@@ -63,13 +63,13 @@ public class Application extends Controller {
             password =User.getUser(user).getPassword();
             gender =User.getUser(user).getGender();
             current_weight=User.getUser(user).getCurrent_weight();
-            desired_weight=User.getUser(user).getDesired_weight();
+            height=User.getUser(user).getHeight();
             
             
         }
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String birth = df.format(birth_date);
-        return ok(profil.render(user, name, surname, birth, password, gender, current_weight, desired_weight));
+        return ok(profil.render(user, name, surname, birth, password, gender, current_weight, height));
    }
    
     public static Result authenticate() {
@@ -177,6 +177,7 @@ public class Application extends Controller {
         return ok(food.render(name));
     }
     
+    // metoda za unos nove vjezbe u bazu
     public static Result insertExercise() {
     	if (exerciseForm.hasErrors()) {
             String user = session("email");
@@ -196,6 +197,7 @@ public class Application extends Controller {
         }
     }
     
+    // metoda za renderanje exercise viewa koji sluzi za unos nove vjezbe u bazu
     public static Result exercise() {
     	String user = session("email");
         String name = null;
@@ -204,6 +206,16 @@ public class Application extends Controller {
             name= User.getUser(user).getName();
         }
     	return ok(exercise.render(name));
+    }
+    
+    // meotda za renderanje viewa za prikaz procjene kalorija
+    public static Result calorieConsumption() {
+    	String user = session("email");
+    	String name = null;
+    	String gender = null;
+    	String current_gender = null;
+    	String height = null;
+    	return ok(calorieConsumption.render());
     }
     
     public static Result userExercise() { 	
@@ -259,9 +271,9 @@ public class Application extends Controller {
 			Date birth_date = registerForm.get().birth_date;
 			String gender=registerForm.get().gender;
 			String current_weight=registerForm.get().current_weight;
-			String desired_weight=registerForm.get().desired_weight;
+			String height = registerForm.get().height;
 			
-	        User.insert(name, surname, birth_date, email, password, phone, address,gender,current_weight, desired_weight, "User");
+	        User.insert(name, surname, birth_date, email, password, phone, address,gender,current_weight, height, "User");
 
             Mails mails = new Mails();
             //mails.sendEmail(mailerClient, email); //zakomentarisano zato sto trenutno baca null exception
@@ -298,7 +310,7 @@ public class Application extends Controller {
 		public Date birth_date;
 		public String gender;
 		public String current_weight;
-		public String desired_weight;
+		public String height;
 	}
 
 
@@ -309,11 +321,13 @@ public class Application extends Controller {
         //i jos fotka
     }
     
+    // klasa za kreiranje forme za unos nove vjezbe u bazu - InsertExercise()
     public static class ExerciseInput {
     	public String title;
     	public String description;
     	public int calories_per_minute;
     }
+    
     
     public static class InputUserExercise {
     	
