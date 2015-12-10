@@ -2,7 +2,7 @@ name := """FoodTracker"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayJava)
+lazy val root = (project in file(".")).enablePlugins(PlayJava) 
 
 scalaVersion := "2.11.6"
 
@@ -12,7 +12,8 @@ libraryDependencies ++= Seq(
   cache,
   javaWs,
   "mysql" % "mysql-connector-java" % "5.1.18",
-  "com.typesafe.play" %% "play-mailer" % "3.0.1"
+  "com.typesafe.play" %% "play-mailer" % "3.0.1",
+  "org.mindrot" % "jbcrypt" % "0.3m" 
   )
 
 lazy val myProject = (project in file("."))

@@ -6,6 +6,8 @@ import java.util.*;
 import play.db.ebean.*;
 import com.avaje.ebean.*;
 import javax.persistence.*;
+import org.mindrot.jbcrypt.BCrypt;
+
 
 
 @Entity
@@ -89,9 +91,19 @@ public class User {
 		Ebean.save(u);
     }
 	public static User check(String email, String password) {
-		        User users = Ebean.find (User.class)
-		        					.where().eq("email",email).eq("password",password).findUnique();
+		        
+				//User users = Ebean.find (User.class)
+		        		//			.where().eq("email",email).eq("password",password).findUnique();
+		
+		User users = Ebean.find (User.class)
+				.where().eq("email",email).findUnique();
+		
+			if(BCrypt.checkpw(password, users.password)){
+		
+									
 		        return users;
+			}
+			return null;
 		    }
 	public static User getUser(String email) {
         return Ebean.find(User.class).where().eq("email", email).findUnique();

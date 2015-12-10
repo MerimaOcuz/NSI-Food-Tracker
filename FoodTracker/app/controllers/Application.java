@@ -25,7 +25,7 @@ import play.mvc.Http.MultipartFormData.*;
 import java.lang.Object;
 import java.io.File;
 import java.util.List;
-
+import org.mindrot.jbcrypt.BCrypt;
 
 public class Application extends Controller {
 
@@ -283,8 +283,8 @@ public class Application extends Controller {
     	}
     }
 	
-	public static Result addUser() {        
-	    if (registerForm.hasErrors()) {
+	public static Result addUser() {  
+		    if (registerForm.hasErrors()) {
 	    	String user = session("email");
 			String role = session("role");
 	        return badRequest(register.render(user, role, registerForm));
@@ -293,7 +293,8 @@ public class Application extends Controller {
 	        String name = registerForm.get().name;
 	        String surname = registerForm.get().surname;
 	        String email = registerForm.get().email;
-	        String password = registerForm.get().password;
+	        String input_password = registerForm.get().password;
+	        String password= BCrypt.hashpw(input_password, BCrypt.gensalt());
 	        String phone = registerForm.get().phone;
 	        String address = registerForm.get().address;
 			Date birth_date = registerForm.get().birth_date;
@@ -318,7 +319,8 @@ public class Application extends Controller {
     	
         public String email;
         public String password;
-        public String validate() {
+        public String validate()
+        {
         	if (User.check(email,password) == null) {
         		return "Invalid user or password";
         	}
