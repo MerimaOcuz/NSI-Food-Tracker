@@ -54,6 +54,10 @@ public class Application extends Controller {
         String gender=null;
         String current_weight=null;
         String height=null;
+        String phone_number=null;
+        String address=null;
+        String desired_weight=null;
+        
         
         if(user != null)
         {
@@ -64,12 +68,15 @@ public class Application extends Controller {
             gender =User.getUser(user).getGender();
             current_weight=User.getUser(user).getCurrent_weight();
             height=User.getUser(user).getHeight();
+            phone_number=User.getUser(user).getPhoneNumber();
+            address=User.getUser(user).getAddress();
+            desired_weight=User.getUser(user).getDesired_weight();
             
             
         }
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String birth = df.format(birth_date);
-        return ok(profil.render(user, name, surname, birth, password, gender, current_weight, height));
+        return ok(profil.render(user, name, surname, birth, password, gender, current_weight, height, phone_number, address, desired_weight));
    }
    
     public static Result authenticate() {
