@@ -22,7 +22,7 @@ public class User {
 	private String phone_number;
 	private String gender;
 	private String current_weight;
-	private String desired_weight;
+	public String desired_weight;
 	private String height;
 	
 	public User(String name, String surname, Date birth_date, String email, String password, String phone, String address, String gender, String current_weight, String height, String type) {
@@ -70,7 +70,12 @@ public class User {
 	public void setCurrent_weight(String current_weight) { this.current_weight = current_weight; }
 	
 	public String getDesired_weight() { return this.desired_weight; }
-	public void setDesired_weight(String desired_weight) { this.desired_weight = desired_weight; }
+	public void setDesired_weight(String desired_weight, String email) {  
+		this.desired_weight = desired_weight;
+		User u = Ebean.find(User.class).where().eq("email", email).findUnique();
+		u.desired_weight = desired_weight;
+		Ebean.save(u);
+	}
 	
 	public String getHeight() { return this.height; }
 	public void setHeight(String height) { this.height = height; }

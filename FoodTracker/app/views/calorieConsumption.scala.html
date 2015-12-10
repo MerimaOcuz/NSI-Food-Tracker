@@ -1,0 +1,123 @@
+@(name:String, desired_weight:String)
+<!DOCTYPE HTML>
+<!-- 
+
+Pri smanjenju težine se može koristiti aproksimacija: 1kg ~ 7000kcal
+
+Ideal body weight in kg:    Dr. JD Robinson 1983
+Men: 52kg + 1.9kg for each inch over 5 feet = 52kg + 1.9*((visina(cm) - 5*30.48)/2.54)
+Women: 49kg + 1.7kg for each inch over 5 feet = 49kg + 1.7*((visina(cm) - 5*30.48)/2.54)
+1 foot = 30.48cm
+1 inch = 2.54cm
+
+The Harris–Benedict equations revised by Roza and Shizgal in 1984
+Men: BMR = 88.362 + (13.397 x weight in kg) + (4.799 x height in cm) - (5.677 x age in years)
+Women: BMR = 447.593 + (9.247 x weight in kg) + (3.098 x height in cm) - (4.330 x age in years)
+
+Recommended daily kilocalorie intake to maintain current weight
+Little to no exercise				Daily kilocalories needed = BMR x 1.2
+Light exercise (1–3 days per week)			Daily kilocalories needed = BMR x 1.375
+Moderate exercise (3–5 days per week)		Daily kilocalories needed = BMR x 1.55
+Heavy exercise (6–7 days per week)		Daily kilocalories needed = BMR x 1.725
+Very heavy exercise (twice per day, extra heavy workouts)	Daily kilocalories needed = BMR x 1.9
+
+Za smanjenje težine se ne preporučuje gubitak veći od 500kcal u odnosu na preporučeni dnevni unos kcal da
+se očuva trenutna težina.
+
+ -->
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <title>Profile</title>
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="Bootstrap User information form snippet with timezones example snippet for Bootstrap." />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+
+
+<!-- Bootstrap -->
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+	
+	<!-- Normalize -->
+	<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/normalize.css")">
+	
+	<!-- Official page style -->
+	<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/stil.css")">
+	
+	<!-- jQuery -->
+    
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/jquery-1.11.0.min.js")"></script>
+    
+    
+    <!-- Bootstrap.min.js -->
+    
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/bootstrap.min.js")"></script>
+	<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/morris.css")">
+	
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/raphael-min.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/morris.min.js")"></script>
+
+
+</head>
+
+   
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+    <div class="container">
+		<div class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-form navbar-left" style="padding-top:8px; margin-left:-15px;"><strong><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> NSI - Foodtracker</strong></div>
+				<div class="navbar-form navbar-right" style="margin-top:15px; right:-25px;"> <a href="profil" > <span class="glyphicon glyphicon-user" aria-hidden="true"></span> @name | <a href="index.html" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-off"></span> <a href="@routes.Application.logout()"> Logout</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="@routes.Application.dashboard()">Home <span class="sr-only">(current)</span></a></li>
+						<li><a href="#">Calendar</a></li>
+						<li><a href="@routes.Application.userExercise()">Exercises</a></li>
+						<li><a href="#">Food consumption</a></li>
+						<li><a href="@routes.Application.calorieConsumption()">Calorie consumption</a></li>
+						<li><a href="@routes.Application.lastAccActivity()">Last account activity</a></li>
+						<li><a href="@routes.Application.insertFood()">Insert Food</a></li>
+						<li><a href="@routes.Application.insertExercise()">Insert Exercise</a></li>
+						<li><a href="@routes.Application.profil()">Profile</a></li>
+					</ul>
+					
+					<form class="navbar-form navbar-right" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search">
+						</div>
+						
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+	</div>
+	
+	<form class="form-horizontal" role="form">
+	 	<div class="form-group">
+	       <label class="col-lg-3 control-label">Desired weight (kg):</label>
+	       <div class="col-lg-8">
+	            <input class="form-control" type="text" value=@desired_weight>
+	       </div>
+	    </div>   
+	    
+	    
+	    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	        
+	</body>
+</html>

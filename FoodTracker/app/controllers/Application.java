@@ -213,9 +213,30 @@ public class Application extends Controller {
     	String user = session("email");
     	String name = null;
     	String gender = null;
-    	String current_gender = null;
+    	String current_weight = null;
     	String height = null;
-    	return ok(calorieConsumption.render());
+    	String desired_weight = null;
+    	if(user != null) 
+    	{
+    		name = User.getUser(user).getName();
+    		gender = User.getUser(user).getGender();
+    		current_weight = User.getUser(user).getCurrent_weight();
+    		height = User.getUser(user).getHeight();
+    		
+    		Double visina = Double.parseDouble(height);
+    		Double ztezina = 0.0;
+    		if(gender=="Male") {
+    			ztezina = 52 + (1.9*((visina - 5*30.48)/2.54));
+    			User.getUser(user).setDesired_weight(ztezina.toString(), user);
+    			desired_weight = ztezina.toString();
+    		}
+    		else {
+    			ztezina = 49 + (1.7*((visina - 5*30.48)/2.54));
+    			User.getUser(user).setDesired_weight(ztezina.toString(), user);
+    			desired_weight = ztezina.toString();
+    		}
+    	}
+    	return ok(calorieConsumption.render(user, desired_weight));
     }
     
     public static Result userExercise() { 	
