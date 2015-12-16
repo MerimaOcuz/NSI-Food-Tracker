@@ -223,27 +223,60 @@ public class Application extends Controller {
     	String current_weight = null;
     	String height = null;
     	String desired_weight = null;
+    	String BMR = null;
+    	Date birth_date = null;
+    	Date current_date = new Date();
+    	String dcal1 = null;
+    	String dcal2 = null;
+    	
+    	List<UserExercise> userExercises = Ebean.find(UserExercise.class).where().eq("user_id", user ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
+    	
+    	
     	if(user != null) 
     	{
     		name = User.getUser(user).getName();
     		gender = User.getUser(user).getGender();
     		current_weight = User.getUser(user).getCurrent_weight();
     		height = User.getUser(user).getHeight();
+    		birth_date = User.getUser(user).getBirthDate();
     		
     		Double visina = Double.parseDouble(height);
     		Double ztezina = 0.0;
+    		Double bmr;
+    		Double dcal1_double;	// dnevni unos kalorija da se ocuva trenutna tezina
+    		Double tezina = Double.parseDouble(current_weight);
+    		Double dcal2_double; 	// dnevni unos kalorija da se postigne zeljena tezina
+    		
     		if(gender=="Male") {
     			ztezina = 52 + (1.9*((visina - 5*30.48)/2.54));
     			User.getUser(user).setDesired_weight(ztezina.toString(), user);
     			desired_weight = ztezina.toString();
+    			
+    			bmr = 88.362 + (13.397*tezina) + (4.799*visina) - (5.677*(current_date.getYear() - birth_date.getYear()));
+    			BMR = bmr.toString();
+    			
+    			dcal1_double = bmr*1.2;		// dnevni unos kalorija da se ocuva current_weight
+        		dcal1 = dcal1_double.toString();
     		}
     		else {
     			ztezina = 49 + (1.7*((visina - 5*30.48)/2.54));
     			User.getUser(user).setDesired_weight(ztezina.toString(), user);
     			desired_weight = ztezina.toString();
+    			
+    			bmr = 447.593 + (9.247*tezina) + (3.098*visina) - (4.330*(current_date.getYear() - birth_date.getYear()));
+    			BMR = bmr.toString();
+    			
+    			dcal1_double = bmr*1.2;		// dnevni unos kalorija da se ocuva current_weight
+        		dcal1 = dcal1_double.toString();
     		}
+    		
+    		dcal2_double = dcal1_double - 500;
+    		dcal2 = dcal2_double.toString();
+    		
     	}
-    	return ok(calorieConsumption.render(user, desired_weight));
+    	
+    	
+    	return ok(calorieConsumption.render(user, desired_weight, BMR, dcal1, dcal2, userExercises));
     }
     
     public static Result userExercise() { 	
@@ -278,7 +311,9 @@ public class Application extends Controller {
     		
     		Exercise vjezba = Ebean.find(Exercise.class).where().eq("title", title).findUnique();	// unese se naziv vjezbe koja se radila pa se nadje vjezba u bazi sa tim nazivom
     		    		    		
-    		if (vjezba !=null) UserExercise.insert(uid, vjezba.getId(), title, timestamp, duration_min);	// unos vjezbe u tabelu
+    		if (vjezba !=null) {
+    			UserExercise.insert(uid, vjezba.getId(), title, timestamp, duration_min, vjezba.getCalories_per_minute());	// unos vjezbe u tabelu
+    		}
     		return redirect(routes.Application.userExercise());
     	}
     }

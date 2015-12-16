@@ -42,6 +42,7 @@ create table user_exercise (
   title                     varchar(255),
   timestamp                 datetime(6),
   duration_min              integer,
+  cal_per_min               integer,
   constraint pk_user_exercise primary key (id))
 ;
 

@@ -16,9 +16,10 @@ public class UserExercise {
 	private int exercise_id;
 	private String title;
 	private Date timestamp;
-	private int duration_min;
+	private int duration_min;	//trajanje vjezbe
+	private int cal_per_min;	//kalorija po minuti za datu vjezbu
 	
-	public UserExercise(String user_id, int exercise_id, String title, Date timestamp, int duration_min) {
+	public UserExercise(String user_id, int exercise_id, String title, Date timestamp, int duration_min, int cal_per_min) {
 		//this.id = id;
 		
 		this.user_id = user_id;
@@ -26,6 +27,7 @@ public class UserExercise {
 		this.title = title;
 		this.timestamp = timestamp;
 		this.duration_min = duration_min;
+		this.cal_per_min = cal_per_min;
 	}
 	
 	public int getId() {
@@ -55,7 +57,7 @@ public class UserExercise {
 	}
 	
 	public Date getTimestamp() {
-		return timestamp;
+		return this.timestamp;
 	}
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
@@ -66,9 +68,19 @@ public class UserExercise {
 	public void setDuration_min(int duration_min) {
 		this.duration_min = duration_min;
 	}
+	public int getCal_per_min() {
+		return this.cal_per_min;
+	}
+	public void setCal_per_min(int cal_per_min) {
+		this.cal_per_min = cal_per_min;
+	}
 	
-	public static void insert(String user_id, int exercise_id, String title, Date timestamp, int duration_min) {
-		UserExercise u = new UserExercise(user_id, exercise_id, title, timestamp, duration_min);
+	public int getAllCalories() {
+		return duration_min*cal_per_min;
+	}
+	
+	public static void insert(String user_id, int exercise_id, String title, Date timestamp, int duration_min, int cal_per_min) {
+		UserExercise u = new UserExercise(user_id, exercise_id, title, timestamp, duration_min, cal_per_min);
 		Ebean.save(u);
 	}
 

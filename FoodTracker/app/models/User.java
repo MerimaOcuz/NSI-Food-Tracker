@@ -93,7 +93,7 @@ public class User {
 	public static User check(String email, String password) {
 		        
 				//User users = Ebean.find (User.class)
-		        		//			.where().eq("email",email).eq("password",password).findUnique();
+		        //				.where().eq("email",email).eq("password",password).findUnique();
 		
 		User users = Ebean.find (User.class)
 				.where().eq("email",email).findUnique();
@@ -104,6 +104,7 @@ public class User {
 		        return users;
 			}
 			return null;
+				return users;
 		    }
 	public static User getUser(String email) {
         return Ebean.find(User.class).where().eq("email", email).findUnique();
