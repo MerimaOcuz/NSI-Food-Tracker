@@ -104,7 +104,7 @@ public class User {
 		        return users;
 			}
 			return null;
-				return users;
+				
 		    }
 	public static User getUser(String email) {
         return Ebean.find(User.class).where().eq("email", email).findUnique();
