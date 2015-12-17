@@ -39,3 +39,6 @@ POST	/insertExercise			controllers.Application.insertExercise()
 
 #Calorie Consumption - procjena za potrebni unos kalorija
 GET		/calorieConsumption		controllers.Application.calorieConsumption()
+
+#Food Consumption - Unos pojedene hrane
+GET 	/FoodConsumption		controllers.Application.FoodConsumption()

@@ -347,6 +347,16 @@ public class Application extends Controller {
 	        );
 	    }
     }
+	
+	public static Result FoodConsumption() { 	
+    	String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate
+    	String name=null;
+        if(uid != null){
+            name= User.getUser(uid).getName();
+        }
+        
+        return ok(foodConsumption.render(name));
+    }
     
     
     
