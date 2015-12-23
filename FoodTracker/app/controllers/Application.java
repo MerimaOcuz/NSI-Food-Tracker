@@ -397,7 +397,7 @@ public class Application extends Controller {
         {
             name= User.getUser(user).getName();
         }
-        return ok(calendar.render(name));
+        return ok(calendar.render("Osman"));
     }
     
     
