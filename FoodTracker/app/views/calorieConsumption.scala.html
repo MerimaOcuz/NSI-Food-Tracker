@@ -1,8 +1,8 @@
-@(name:String, desired_weight:String, BMR:String, dcal1:String, dcal2:String, userExercises: List[UserExercise])
+@(name:String, desired_weight:String, BMR:String, dcal1:String, dcal2:String, userExercises: List[UserExercise], userFoods: List[FoodConsumption])
 <!DOCTYPE HTML>
 <!-- 
 
-Pri smanjenju te≈æine se mo≈æe koristiti aproksimacija: 1kg ~ 7000kcal
+Pri smanjenju teûine se moûe koristiti aproksimacija: 1kg ~ 7000kcal
 
 Ideal body weight in kg:    Dr. JD Robinson 1983
 Men: 52kg + 1.9kg for each inch over 5 feet = 52kg + 1.9*((visina(cm) - 5*30.48)/2.54)
@@ -10,19 +10,19 @@ Women: 49kg + 1.7kg for each inch over 5 feet = 49kg + 1.7*((visina(cm) - 5*30.4
 1 foot = 30.48cm
 1 inch = 2.54cm
 
-The Harris‚ÄìBenedict equations revised by Roza and Shizgal in 1984
+The HarrisñBenedict equations revised by Roza and Shizgal in 1984
 Men: BMR = 88.362 + (13.397 x weight in kg) + (4.799 x height in cm) - (5.677 x age in years)
 Women: BMR = 447.593 + (9.247 x weight in kg) + (3.098 x height in cm) - (4.330 x age in years)
 
 Recommended daily kilocalorie intake to maintain current weight
 Little to no exercise				Daily kilocalories needed = BMR x 1.2
-Light exercise (1‚Äì3 days per week)			Daily kilocalories needed = BMR x 1.375
-Moderate exercise (3‚Äì5 days per week)		Daily kilocalories needed = BMR x 1.55
-Heavy exercise (6‚Äì7 days per week)		Daily kilocalories needed = BMR x 1.725
+Light exercise (1ñ3 days per week)			Daily kilocalories needed = BMR x 1.375
+Moderate exercise (3ñ5 days per week)		Daily kilocalories needed = BMR x 1.55
+Heavy exercise (6ñ7 days per week)		Daily kilocalories needed = BMR x 1.725
 Very heavy exercise (twice per day, extra heavy workouts)	Daily kilocalories needed = BMR x 1.9
 
-Za smanjenje te≈æine se ne preporuƒçuje gubitak veƒái od 500kcal u odnosu na preporuƒçeni dnevni unos kcal da
-se oƒçuva trenutna te≈æina.
+Za smanjenje teûine se ne preporuËuje gubitak veÊi od 500kcal u odnosu na preporuËeni dnevni unos kcal da
+se oËuva trenutna teûina.
 
  -->
 <html lang="en">
@@ -88,7 +88,7 @@ se oƒçuva trenutna te≈æina.
 						<li class="active"><a href="@routes.Application.dashboard()">Home <span class="sr-only">(current)</span></a></li>
 						<li><a href="#">Calendar</a></li>
 						<li><a href="@routes.Application.userExercise()">Exercises</a></li>
-						<li><a href="#">Food consumption</a></li>
+						<li><a href="@routes.Application.userFood()">Food consumption</a></li>
 						<li><a href="@routes.Application.calorieConsumption()">Calorie consumption</a></li>
 						<li><a href="@routes.Application.lastAccActivity()">Last account activity</a></li>
 						<li><a href="@routes.Application.insertFood()">Insert Food</a></li>
@@ -111,7 +111,7 @@ se oƒçuva trenutna te≈æina.
 	<div class="container" style="margin-top:40px;">
 	
 	<div class="column">
-	<div class="col-md-5">
+	<div class="col-md-4">
 	
 		<form class="form-horizontal" role="form">
 		 	<div class="form-group">
@@ -149,7 +149,7 @@ se oƒçuva trenutna te≈æina.
 	    <div class="column">
 			<div class="col-md-4">
 				<div class="panel panel-success">
-					<div class="panel-heading">Consumped calories</div>
+					<div class="panel-heading">Calories lost</div>
 					
 					<table class="table table-bordered">
 					  <thead>
@@ -173,18 +173,24 @@ se oƒçuva trenutna te≈æina.
 					</table>
 				</div>
 			</div>
-	    </div>
+	    
 	   
-	    <script>
+	   
+		<div class="col-md-4">
+				<div class="panel panel-warning">
+					<div class="panel-heading">Calories consumption chart</div>
+					<div id="graph" class="panel-body" style="width:100%; height:200px;"></div>
+				</div>
+			</div>
+	   
+	    <script type="text/javascript">
 				// Use Morris.Bar
 				new Morris.Bar({
 				  element: 'graph',
 				  data: [
-					{x: '1.11', value:1457},
-					{x: '2.11', value:1202},
-					{x: '3.11', value:2457},
-					{x: '4.11', value:1147},
-					{x: '5.11', value:1020}
+					@for(userExercise <- userExercises){
+						{x: @userExercise.getId(), value:@userExercise.getAllCalories()},
+					}
 				  ],
 				  xkey: 'x',
 				  ykeys: ['value'],
@@ -193,7 +199,66 @@ se oƒçuva trenutna te≈æina.
 				  console.log(i, row);
 				});
 			</script>
+		</div>
 		
+		<div class="column">
+			<div class="col-md-4">
+				<div class="panel panel-success">
+					<div class="panel-heading">Calories gained</div>
+					
+					<table class="table table-bordered">
+					  <thead>
+						<tr>
+							<th>Date</th>
+							<th>kcal</th>
+						</tr>
+					  </thead>
+					  <tbody>
+					  
+					  	@for(userFood <- userFoods){
+					  		<tr>
+								<td>@userFood.getTimestamp()</td>
+								
+								<td>@userFood.getAllCalories()</td>
+							</tr>
+   					 		
+						}
+						
+					  </tbody>
+					</table>
+				</div>
+			</div>
+	    
+	   
+	   
+		<div class="col-md-4">
+				<div class="panel panel-warning">
+					<div class="panel-heading">Calories gain chart</div>
+					<div id="graph1" class="panel-body" style="width:100%; height:200px;"></div>
+				</div>
+			</div>
+	   
+	    <script type="text/javascript">
+				// Use Morris.Bar
+				new Morris.Bar({
+				  element: 'graph1',
+				  data: [
+					@for(userFood <- userFoods){
+						{x: @userFood.getId(), value1:@userFood.getAllCalories()},
+					}
+				  ],
+				  xkey: 'x',
+				  ykeys: ['value1'],
+				  labels: ['Calories']
+				}).on('click', function(i, row){
+				  console.log(i, row);
+				});
+			</script>
+		</div>
+		
+		
+	    </div>
+	    
 	    
 	    
 	    <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>

@@ -19,6 +19,17 @@ create table food (
   constraint pk_food primary key (id))
 ;
 
+create table food_consumption (
+  id                        integer auto_increment not null,
+  food_id                   integer,
+  user_id                   varchar(255),
+  timestamp                 datetime(6),
+  name                      varchar(255),
+  calories                  integer,
+  quantity                  integer,
+  constraint pk_food_consumption primary key (id))
+;
+
 create table user (
   email                     varchar(255) not null,
   password                  varchar(255),
@@ -56,6 +67,8 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table exercise;
 
 drop table food;
+
+drop table food_consumption;
 
 drop table user;
 

@@ -33,7 +33,8 @@ public class Application extends Controller {
 
 	static Form<Register> registerForm = form(Register.class);
 	static Form<Login> loginForm = form(Login.class);
-	static Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class);
+	static Form<InputUserExercise> inputUserExerciseForm = form(InputUserExercise.class);	//forma za unos vjezbe uradjene na jednom treningu
+	static Form<InputUserFood> inputUserFoodForm = form(InputUserFood.class);				//forma za unos hrane pojedene u jednom obroku
 	static Form<Food> foodForm = form(Food.class);
 	static Form<Exercise> exerciseForm = form(Exercise.class);
 	
@@ -230,7 +231,7 @@ public class Application extends Controller {
     	String dcal2 = null;
     	
     	List<UserExercise> userExercises = Ebean.find(UserExercise.class).where().eq("user_id", user ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
-    	
+    	List<FoodConsumption> userFoods = Ebean.find(FoodConsumption.class).where().eq("user_id", user ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
     	
     	if(user != null) 
     	{
@@ -275,10 +276,50 @@ public class Application extends Controller {
     		
     	}
     	
-    	
-    	return ok(calorieConsumption.render(user, desired_weight, BMR, dcal1, dcal2, userExercises));
+    	return ok(calorieConsumption.render(name, desired_weight, BMR, dcal1, dcal2, userExercises, userFoods));
     }
     
+    // funkcija za prikaz userFoof view-a, odnosno Food Consumption tab na dashboardu
+   public static Result userFood() {
+	   String user = session("email");
+	   String name = null;
+	   if(user != null) name = User.getUser(user).getName();
+	   
+	   List<Food> foods = Ebean.find(Food.class).findList(); // lista svih vrsta hrane (obroka) koje korisnik moze izabrati prilikom unosa
+	   List<FoodConsumption> userFoods = Ebean.find(FoodConsumption.class).where().eq("user_id", user ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
+	   return ok(userFood.render(name, userFoods, foods, inputUserFoodForm));
+    }
+   
+   // funkcija za unos nove userFood u bazu
+   public static Result addUserFood() {
+	   String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate
+   	   String name=null;
+       if(uid != null)
+       {
+           name= User.getUser(uid).getName();
+       }
+       List<Food> foods = Ebean.find(Food.class).findList(); // lista svih vrsta hrane (obroka) koje korisnik moze izabrati prilikom unosa
+       List<FoodConsumption> userFoods = Ebean.find(FoodConsumption.class).where().eq("user_id", uid ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
+       
+       if (inputUserExerciseForm.hasErrors()) {
+   		String title = session("title");	// u sesiju se unosi i naziv hrane zbog dalje provjere
+   		return badRequest(userFood.render(name, userFoods, foods, inputUserFoodForm));
+   	} else {
+   		Form<InputUserFood> inputUserFoodForm = form(InputUserFood.class).bindFromRequest();
+   		String title = inputUserFoodForm.get().title;
+   		Date timestamp = inputUserFoodForm.get().timestamp;
+   		int quantity = inputUserFoodForm.get().quantity;
+   		
+   		Food hrana = Ebean.find(Food.class).where().eq("name", title).findUnique();	// unese se naziv hrane koja je koristena pa se nadje hrana u bazi sa tim nazivom
+   		    		    		
+   		if (hrana !=null) {
+   			FoodConsumption.insert(uid, hrana.getId(), timestamp, hrana.getName(), hrana.getCalories(), quantity);	// unos vjezbe u tabelu
+   		}
+   		return redirect(routes.Application.userFood());
+   }
+   }
+    
+    // funkcija za prikaz userExercise view-a, odnosno Exercise tab na dashboardu
     public static Result userExercise() { 	
     	String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate
     	String name=null;
@@ -291,6 +332,7 @@ public class Application extends Controller {
     	return ok(userExercise.render(name, userExercises, exercises, inputUserExerciseForm));
     }
     
+    // funkcija za unos nove userExercise u bazu
     public static Result addUserExercise() {
     	String uid = session("email");	// email koji je unesen u formu i proslijedjen u sesiju metodom authenticate
     	String name=null;
@@ -393,12 +435,19 @@ public class Application extends Controller {
     	public int calories_per_minute;
     }
     
-    
+    // klasa za unos nove vjezbe koju je korisnik uradio u jednom terminu (UserExercise)
     public static class InputUserExercise {
     	
     	public String title;
     	public Date timestamp;
     	public int duration_min;
+    }
+    
+    // klasa za unos novog obroka koji je korisnik konzumirao
+    public static class InputUserFood {
+    	public String title;		// naziv jela
+    	public Date timestamp; 		// kada je jelo konzumirano
+    	public int quantity;		// konzumirana kolicina u gramima
     }
     
 }
