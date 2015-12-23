@@ -390,7 +390,7 @@ public class Application extends Controller {
 	    }
     }
 	
-	public static Result Calendar(){
+	public static Result calendar(){
         String user = session("email");
         String name = null;
         if(user != null)

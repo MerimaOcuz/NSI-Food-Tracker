@@ -45,4 +45,4 @@ GET		/userFood				controllers.Application.userFood()
 POST	/userFood				controllers.Application.addUserFood()
 
 #Calendar
-GET		/Calendar				controllers.Application.Calendar()
+GET		/calendar				controllers.Application.calendar()
