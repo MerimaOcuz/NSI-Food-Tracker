@@ -46,3 +46,4 @@ POST	/userFood				controllers.Application.addUserFood()
 
 #Calendar
 GET		/calendar				controllers.Application.calendar()
+
