@@ -42,3 +42,6 @@ GET		/calorieConsumption		controllers.Application.calorieConsumption()
 
 #Food Consumption - Unos pojedene hrane
 GET 	/FoodConsumption		controllers.Application.FoodConsumption()
+
+#Calendar
+GET /Calendar					controllers.Application.Calendar()
