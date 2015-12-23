@@ -389,6 +389,16 @@ public class Application extends Controller {
 	        );
 	    }
     }
+	
+	public static Result Calendar(){
+        String user = session("email");
+        String name = null;
+        if(user != null)
+        {
+            name= User.getUser(user).getName();
+        }
+        return ok(calendar.render(name));
+    }
     
     
     

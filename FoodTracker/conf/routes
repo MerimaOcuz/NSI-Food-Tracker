@@ -43,3 +43,6 @@ GET		/calorieConsumption		controllers.Application.calorieConsumption()
 #Food Consumption - unos jednog obroka
 GET		/userFood				controllers.Application.userFood()
 POST	/userFood				controllers.Application.addUserFood()
+
+#Calendar
+GET		/Calendar				controllers.Application.Calendar()
