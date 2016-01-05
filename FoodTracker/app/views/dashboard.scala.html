@@ -1,4 +1,4 @@
-@(user: String, name:String, userExercises: List[UserExercise])
+@(user: String, name:String, userExercises: List[UserExercise], userFoods: List[FoodConsumption], foods: List[Food])
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -119,42 +119,27 @@
 					}
 				});
 			</script>
+			<div class="column">
 			<div class="col-md-4">
 				<div class="panel panel-success">
-					<div class="panel-heading">Food consumption</div>
+					<div class="panel-heading">Meals</div>
 					
 					<table class="table table-bordered">
 					  <thead>
 						<tr>
-							<th>Time</th>
-							<th>Activity</th>
+							<th>Date</th>
+							<th>Food</th>
 						</tr>
 					  </thead>
 					  <tbody>
-						<tr>
-							<td>1:47 5.11.2015.</td>
-							<td>Grilled Chicken, Black beans, Browni Rice</td>
-						</tr>
-						<tr>
-							<td>21:00 4.11.2015.</td>
-							<td>Fruit & Yogurt, Parfaits, Boiled Eggs</td>
-						</tr>
-						<tr>
-							<td>18:13 4.11.2015.</td>
-							<td>Carrot - Cheddar, Sandwich, Pineapple Slices</td>
-						</tr>
-						<tr>
-							<td>15:00 4.11.2015.</td>
-							<td>Tuna Salad, Crackers, Fresh Cherries</td>
-						</tr>
-						<tr>
-							<td>10:05 4.11.2015.</td>
-							<td>Italian Sausage, Soup, Sourdough Rolls</td>
-						</tr>
-						<tr>
-							<td>21:00 3.11.2015.</td>
-							<td>Grilled Turkey, Apple Slices</td>
-						</tr>
+					  
+					  	@for(userFood <- userFoods){
+					  		<tr>
+								<td>@userFood.getTimestamp()</td>
+								<td>@userFood.getName()</td>
+							</tr>
+   					 		
+						}
 						
 						<tr>
 							<td colspan="2"><a href="#">See all..</a></td>
@@ -162,7 +147,8 @@
 					  </tbody>
 					</table>
 				</div>
-			</div>
+		</div>
+	</div>
 		</div>
 	</div>
 	
@@ -194,16 +180,14 @@
 				</div>
 			</div>
 			
-			<script>
+			<script type="text/javascript">
 				// Use Morris.Bar
 				new Morris.Bar({
 				  element: 'graph',
 				  data: [
-					{x: '1.11', value:1457},
-					{x: '2.11', value:1202},
-					{x: '3.11', value:2457},
-					{x: '4.11', value:1147},
-					{x: '5.11', value:1020}
+					@for(userExercise <- userExercises){
+						{x: @userExercise.getId(), value:@userExercise.getAllCalories()},
+					}
 				  ],
 				  xkey: 'x',
 				  ykeys: ['value'],
@@ -212,6 +196,7 @@
 				  console.log(i, row);
 				});
 			</script>
+			
 			<div class="col-md-4">
 				<div class="panel panel-danger">
 					<div class="panel-heading">Last account activity</div>

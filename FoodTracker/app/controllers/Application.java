@@ -133,7 +133,10 @@ public class Application extends Controller {
             name= User.getUser(user).getName();
         }
         List<UserExercise> userExercises = Ebean.find(UserExercise.class).where().eq("user_id", user).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
-    	return ok(dashboard.render(user, name, userExercises));
+        List<Food> foods = Ebean.find(Food.class).findList(); // lista svih vrsta hrane (obroka) koje korisnik moze izabrati prilikom unosa
+ 	   List<FoodConsumption> userFoods = Ebean.find(FoodConsumption.class).where().eq("user_id", user ).findList(); // trazi se lista aktivnosti samo onog korisnika koji je trenutno logiran
+ 	   
+        return ok(dashboard.render(user, name, userExercises, userFoods, foods));
     }
 
     public static Result lastAccActivity() {
