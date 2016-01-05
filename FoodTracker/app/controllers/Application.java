@@ -397,7 +397,7 @@ public class Application extends Controller {
         {
             name= User.getUser(user).getName();
         }
-        return ok(calendar.render("Osman"));
+        return ok(calendar.render(name));
     }
     
     
@@ -418,6 +418,7 @@ public class Application extends Controller {
   
     
     public static class Register {
+    	
 	    public String email;
 	    public String name;
 	    public String surname;
